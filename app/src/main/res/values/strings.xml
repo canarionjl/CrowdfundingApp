@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">CrowdfundingApp</string>
+    <string name="login_button">LOGIN</string>
+    <string name="register_button">REGISTRARSE</string>
+    <string name="register_message_login_screen">¿No tienes una cuenta? Regístrate aquí</string>
+    <string name="login_message_at_register_screen">¿Ya tienes una cuenta? Inicia sesión aquí</string>
+    <string name="title_activity_projects_list">ProjectsListActivity</string>
+    <string name="Text_CardView_Button_SeeMore">VER MÁS</string>
+    <string name="SupportProjectButton">APOYAR PROYECTO</string>
+
+
+</resources>

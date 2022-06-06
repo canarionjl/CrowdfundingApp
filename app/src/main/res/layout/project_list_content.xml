@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    android:background="@color/primaryLightColor"
+    app:cardCornerRadius="15dp"
+    app:cardElevation="10dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="195dp"
+        android:background="@color/primaryLightColor">
+
+        <TextView
+            android:id="@+id/textViewTitleDetailProject"
+            android:layout_width="194dp"
+            android:layout_height="24dp"
+            android:layout_marginTop="24dp"
+            android:fontFamily="sans-serif-black"
+            android:text="TextView"
+            android:textColor="@color/primaryTextColor"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="TÍTULO DEL PROYECTO" />
+
+        <ImageView
+            android:id="@+id/imageViewCategoryDetailProject"
+            android:layout_width="109dp"
+            android:layout_height="105dp"
+            android:layout_marginTop="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.089"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewTitleDetailProject"
+            tools:srcCompat="@tools:sample/avatars" />
+
+        <TextView
+            android:id="@+id/textViewCategoryDetailProject"
+            android:layout_width="161dp"
+            android:layout_height="29dp"
+            android:layout_marginStart="40dp"
+            android:text="TextView"
+            android:textColor="@color/primaryTextColor"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/imageViewCategoryDetailProject"
+            app:layout_constraintTop_toTopOf="@+id/imageViewCategoryDetailProject"
+            tools:text="Categoría del proyecto" />
+
+        <TextView
+            android:id="@+id/textViewAuthorDetailProject"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="TextView"
+            android:textColor="@color/primaryTextColor"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="@+id/textViewCategoryDetailProject"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/textViewCategoryDetailProject"
+            app:layout_constraintTop_toBottomOf="@+id/textViewCategoryDetailProject"
+            tools:text="Autor del proyecto" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="168dp"
+            android:layout_marginTop="24dp"
+            android:fontFamily="sans-serif-medium"
+            android:text="@string/Text_CardView_Button_SeeMore"
+            android:textColor="@color/secondaryDarkColor"
+            android:textSize="17sp"
+            app:layout_constraintStart_toEndOf="@+id/imageViewCategoryDetailProject"
+            app:layout_constraintTop_toBottomOf="@+id/textViewAuthorDetailProject" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/primaryLightColor"
+    tools:context=".RegisterActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbarRegisterActivity"
+        android:layout_width="414dp"
+        android:layout_height="77dp"
+        android:background="@color/secondaryDarkColor"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/editTextRegisterUserName"
+        android:layout_width="278dp"
+        android:layout_height="61dp"
+        android:layout_marginTop="60dp"
+        android:ems="10"
+        android:hint="Nombre de usuario"
+        android:inputType="textPersonName"
+        android:textColorHint="#00695C"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.511"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbarRegisterActivity" />
+
+    <EditText
+        android:id="@+id/editTextRegisterPassword"
+        android:layout_width="280dp"
+        android:layout_height="58dp"
+        android:layout_marginTop="52dp"
+        android:ems="10"
+        android:hint="Contraseña"
+        android:inputType="textPassword"
+        android:textColorHint="#00695C"
+        app:layout_constraintEnd_toEndOf="@+id/editTextRegisterEmailAddress"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/editTextRegisterEmailAddress"
+        app:layout_constraintTop_toBottomOf="@+id/editTextRegisterEmailAddress" />
+
+    <EditText
+        android:id="@+id/editTextRegisterEmailAddress"
+        android:layout_width="278dp"
+        android:layout_height="63dp"
+        android:layout_marginTop="40dp"
+        android:ems="10"
+        android:hint="Correo electrónico"
+        android:inputType="textEmailAddress"
+        android:textColorHint="#00695C"
+        app:layout_constraintEnd_toEndOf="@+id/editTextRegisterUserName"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/editTextRegisterUserName"
+        app:layout_constraintTop_toBottomOf="@+id/editTextRegisterUserName" />
+
+    <Button
+        android:id="@+id/buttonRegister"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:backgroundTint="@color/secondaryDarkColor"
+        android:text="@string/register_button"
+        android:textColor="@color/secondaryTextColor"
+        app:layout_constraintEnd_toEndOf="@+id/editTextRegisterPassword"
+        app:layout_constraintHorizontal_bias="0.481"
+        app:layout_constraintStart_toStartOf="@+id/editTextRegisterPassword"
+        app:layout_constraintTop_toBottomOf="@+id/editTextRegisterPassword" />
+
+    <TextView
+        android:id="@+id/textLoginRegisterScreen"
+        android:layout_width="319dp"
+        android:layout_height="34dp"
+        android:layout_marginTop="44dp"
+        android:fontFamily="sans-serif-black"
+        android:text="@string/login_message_at_register_screen"
+        android:textColor="@color/primaryTextColor"
+        android:textSize="17sp"
+        app:layout_constraintEnd_toEndOf="@+id/buttonRegister"
+        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintStart_toStartOf="@+id/buttonRegister"
+        app:layout_constraintTop_toBottomOf="@+id/buttonRegister" />
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
