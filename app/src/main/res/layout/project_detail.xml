@@ -72,7 +72,7 @@
         android:layout_height="60dp"
         android:layout_marginTop="28dp"
         android:backgroundTint="@color/secondaryDarkColor"
-        android:text="@string/SupportProjectButton"
+        android:text="@string/NotFavouriteButton"
         android:textColor="@color/secondaryTextColor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -95,7 +95,7 @@
             android:layout_weight="1"
             android:backgroundTint="@color/primaryColor"
             android:contextClickable="true"
-            app:srcCompat="@drawable/favorito_borde"
+            app:srcCompat="@drawable/money_payment_icon"
             tools:ignore="SpeakableTextPresentCheck" />
 
         <ImageButton

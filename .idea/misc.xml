@@ -3,10 +3,13 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/canar/AndroidStudioProjects/CrowfundingApp/app/src/main/res/drawable/alarma_icon.xml" value="0.2405" />
         <entry key="..\:/Users/canar/AndroidStudioProjects/CrowfundingApp/app/src/main/res/drawable/exit_icon.xml" value="0.1" />
+        <entry key="..\:/Users/canar/AndroidStudioProjects/CrowfundingApp/app/src/main/res/drawable/favorito_borde.xml" value="0.1255" />
         <entry key="..\:/Users/canar/AndroidStudioProjects/CrowfundingApp/app/src/main/res/drawable/favorito_relleno.xml" value="0.1" />
         <entry key="..\:/Users/canar/AndroidStudioProjects/CrowfundingApp/app/src/main/res/drawable/ic_baseline_add_alarm_24.xml" value="0.1" />
         <entry key="..\:/Users/canar/AndroidStudioProjects/CrowfundingApp/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
+        <entry key="..\:/Users/canar/AndroidStudioProjects/CrowfundingApp/app/src/main/res/drawable/location_icon.xml" value="0.1255" />
         <entry key="..\:/Users/canar/AndroidStudioProjects/CrowfundingApp/app/src/main/res/layout/activity_container_recycler_view.xml" value="0.24947916666666667" />
         <entry key="..\:/Users/canar/AndroidStudioProjects/CrowfundingApp/app/src/main/res/layout/activity_login.xml" value="0.264" />
         <entry key="..\:/Users/canar/AndroidStudioProjects/CrowfundingApp/app/src/main/res/layout/activity_main.xml" value="0.22010869565217392" />
