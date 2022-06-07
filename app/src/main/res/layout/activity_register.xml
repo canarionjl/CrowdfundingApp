@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/primaryLightColor"
-    tools:context=".RegisterActivity">
+    tools:context=".register.RegisterActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbarRegisterActivity"
@@ -65,30 +65,39 @@
         android:id="@+id/buttonRegister"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="20dp"
         android:backgroundTint="@color/secondaryDarkColor"
         android:text="@string/register_button"
         android:textColor="@color/secondaryTextColor"
-        app:layout_constraintEnd_toEndOf="@+id/editTextRegisterPassword"
-        app:layout_constraintHorizontal_bias="0.481"
-        app:layout_constraintStart_toStartOf="@+id/editTextRegisterPassword"
-        app:layout_constraintTop_toBottomOf="@+id/editTextRegisterPassword" />
+        app:layout_constraintEnd_toEndOf="@+id/textViewIncorrectData"
+        app:layout_constraintStart_toStartOf="@+id/textViewIncorrectData"
+        app:layout_constraintTop_toBottomOf="@+id/textViewIncorrectData" />
 
     <TextView
         android:id="@+id/textLoginRegisterScreen"
         android:layout_width="319dp"
         android:layout_height="34dp"
-        android:layout_marginTop="44dp"
+        android:layout_marginTop="36dp"
         android:fontFamily="sans-serif-black"
         android:text="@string/login_message_at_register_screen"
         android:textColor="@color/primaryTextColor"
         android:textSize="17sp"
         app:layout_constraintEnd_toEndOf="@+id/buttonRegister"
-        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="@+id/buttonRegister"
         app:layout_constraintTop_toBottomOf="@+id/buttonRegister" />
 
-
+    <TextView
+        android:id="@+id/textViewIncorrectData"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:textColor="#EC0707"
+        app:layout_constraintEnd_toEndOf="@+id/editTextRegisterPassword"
+        app:layout_constraintHorizontal_bias="0.486"
+        app:layout_constraintStart_toStartOf="@+id/editTextRegisterPassword"
+        app:layout_constraintTop_toBottomOf="@+id/editTextRegisterPassword"
+        tools:text="Datos incorrectos" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

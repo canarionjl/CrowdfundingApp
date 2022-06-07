@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/primaryLightColor"
-    tools:context=".LoginActivity">
+    tools:context=".login.LoginActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbarLoginActivity"
@@ -23,7 +23,7 @@
         android:id="@+id/editTextLoginUserName"
         android:layout_width="278dp"
         android:layout_height="61dp"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="64dp"
         android:ems="10"
         android:hint="Nombre de usuario"
         android:inputType="textPersonName"
@@ -52,14 +52,14 @@
         android:id="@+id/buttonLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="20dp"
         android:backgroundTint="@color/secondaryDarkColor"
         android:text="@string/login_button"
         android:textColor="@color/secondaryTextColor"
-        app:layout_constraintEnd_toEndOf="@+id/editTextLoginPassword"
-        app:layout_constraintHorizontal_bias="0.505"
-        app:layout_constraintStart_toStartOf="@+id/editTextLoginPassword"
-        app:layout_constraintTop_toBottomOf="@+id/editTextLoginPassword" />
+        app:layout_constraintEnd_toEndOf="@+id/textViewLoginErrorMessage"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="@+id/textViewLoginErrorMessage"
+        app:layout_constraintTop_toBottomOf="@+id/textViewLoginErrorMessage" />
 
     <TextView
         android:id="@+id/textLoginRegister"
@@ -71,20 +71,44 @@
         android:textSize="17sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonLogin"
-        app:layout_constraintVertical_bias="0.132" />
+        app:layout_constraintVertical_bias="0.077" />
 
     <ImageView
         android:id="@+id/imageCrowdfundingIconLoginScreen"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="28dp"
+        app:layout_constraintEnd_toEndOf="@+id/textViewGuestAccess"
+        app:layout_constraintStart_toStartOf="@+id/textViewGuestAccess"
+        app:layout_constraintTop_toBottomOf="@+id/textViewGuestAccess"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/textViewLoginErrorMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:textColor="#E40E0E"
+        app:layout_constraintEnd_toEndOf="@+id/editTextLoginPassword"
+        app:layout_constraintHorizontal_bias="0.426"
+        app:layout_constraintStart_toStartOf="@+id/editTextLoginPassword"
+        app:layout_constraintTop_toBottomOf="@+id/editTextLoginPassword"
+        tools:text="Usuario y/o contraseña incorrectos" />
+
+    <TextView
+        android:id="@+id/textViewGuestAccess"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:fontFamily="sans-serif-black"
+        android:text="@string/GuestButton"
+        android:textColor="@color/primaryTextColor"
+        android:textSize="19sp"
         app:layout_constraintEnd_toEndOf="@+id/textLoginRegister"
         app:layout_constraintStart_toStartOf="@+id/textLoginRegister"
-        app:layout_constraintTop_toBottomOf="@+id/textLoginRegister"
-        app:layout_constraintVertical_bias="0.357"
-        tools:srcCompat="@tools:sample/avatars" />
+        app:layout_constraintTop_toBottomOf="@+id/textLoginRegister" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

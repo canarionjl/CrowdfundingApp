@@ -10,5 +10,5 @@
     android:paddingStart="5dp"
     android:layout_height="match_parent"
     app:layoutManager="LinearLayoutManager"
-    tools:context="ProjectsListActivity"
+    tools:context=".projectList.ProjectsListActivity"
     tools:listitem="@layout/project_list_content"/>
