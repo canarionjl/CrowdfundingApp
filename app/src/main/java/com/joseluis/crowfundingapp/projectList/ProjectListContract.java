@@ -5,15 +5,15 @@ import java.lang.ref.WeakReference;
 public interface ProjectListContract {
 
     interface View {
-        void injectPresenter(Presenter presenter);
+        /*void injectPresenter(Presenter presenter);
 
         void onDataUpdated(ProjectListViewModel viewModel);
 
-        void navigateToNextScreen();
+        void navigateToNextScreen();*/
     }
 
     interface Presenter {
-        void injectView(WeakReference<View> view);
+/*        void injectView(WeakReference<View> view);
 
         void injectModel(Model model);
 
@@ -27,7 +27,7 @@ public interface ProjectListContract {
 
         void onPause();
 
-        void onDestroy();
+        void onDestroy();*/
     }
 
     interface Model {

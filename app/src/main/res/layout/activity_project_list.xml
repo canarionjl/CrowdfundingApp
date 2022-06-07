@@ -6,7 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".projectList.ProjectsListActivity">
+    android:id="@+id/activity_project_list"
+    tools:context=".projectList.ProjectListActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbarRecyclerActivity"

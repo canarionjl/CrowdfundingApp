@@ -1,5 +1,7 @@
 package com.joseluis.crowfundingapp.register;
 
+import com.joseluis.crowfundingapp.app.AppMediator;
+
 import java.lang.ref.WeakReference;
 
 public class RegisterPresenter implements RegisterContract.Presenter {
@@ -13,9 +15,9 @@ public class RegisterPresenter implements RegisterContract.Presenter {
 
     public RegisterPresenter(AppMediator mediator) {
         this.mediator = mediator;
-        state = mediator.getRegisterState();
+        //state = mediator.getRegisterState();
     }
-
+/*
     @Override
     public void onStart() {
         // Log.e(TAG, "onStart()");
@@ -26,7 +28,7 @@ public class RegisterPresenter implements RegisterContract.Presenter {
         // call the model and update the state
         state.data = model.getStoredData();
 
-        // use passed state if is necessary
+       *//* // use passed state if is necessary
         PreviousToRegisterState savedState = getStateFromPreviousScreen();
         if (savedState != null) {
 
@@ -34,7 +36,7 @@ public class RegisterPresenter implements RegisterContract.Presenter {
             model.onDataFromPreviousScreen(savedState.data);
 
             // update the state if is necessary
-            state.data = savedState.data;
+            state.data = savedState.data;*//*
         }
     }
 
@@ -48,7 +50,7 @@ public class RegisterPresenter implements RegisterContract.Presenter {
 
     @Override
     public void onResume() {
-        // Log.e(TAG, "onResume()");
+      *//*  // Log.e(TAG, "onResume()");
 
         // use passed state if is necessary
         NextToRegisterState savedState = getStateFromNextScreen();
@@ -58,7 +60,7 @@ public class RegisterPresenter implements RegisterContract.Presenter {
             model.onDataFromNextScreen(savedState.data);
 
             // update the state if is necessary
-            state.data = savedState.data;
+            state.data = savedState.data;*//*
         }
 
         // call the model and update the state
@@ -84,7 +86,7 @@ public class RegisterPresenter implements RegisterContract.Presenter {
         // Log.e(TAG, "onDestroy()");
     }
 
-    private NextToRegisterState getStateFromNextScreen() {
+*//*    private NextToRegisterState getStateFromNextScreen() {
         return mediator.getNextRegisterScreenState();
     }
 
@@ -98,7 +100,7 @@ public class RegisterPresenter implements RegisterContract.Presenter {
 
     private PreviousToRegisterState getStateFromPreviousScreen() {
         return mediator.getPreviousRegisterScreenState();
-    }
+    }*//*
 
     @Override
     public void injectView(WeakReference<RegisterContract.View> view) {
@@ -108,6 +110,6 @@ public class RegisterPresenter implements RegisterContract.Presenter {
     @Override
     public void injectModel(RegisterContract.Model model) {
         this.model = model;
-    }
+    }*/
 
 }

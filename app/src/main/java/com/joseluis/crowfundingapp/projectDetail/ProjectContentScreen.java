@@ -10,6 +10,7 @@ public class ProjectContentScreen {
 
         WeakReference<FragmentActivity> context =
                 new WeakReference<>((FragmentActivity) view);
+/*
 
         String data = context.get().getString(R.string.app_name);
 
@@ -21,6 +22,7 @@ public class ProjectContentScreen {
         presenter.injectView(new WeakReference<>(view));
 
         view.injectPresenter(presenter);
+*/
 
     }
 }

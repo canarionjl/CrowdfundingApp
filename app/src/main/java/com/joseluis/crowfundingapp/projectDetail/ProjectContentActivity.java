@@ -25,15 +25,15 @@ public class ProjectContentActivity
         // do the setup
         ProjectContentScreen.configure(this);
 
-        if (savedInstanceState == null) {
+  /*      if (savedInstanceState == null) {
             presenter.onStart();
 
         } else {
             presenter.onRestart();
-        }
+        }*/
     }
 
-    @Override
+    /*@Override
     protected void onResume() {
         super.onResume();
 
@@ -61,13 +61,13 @@ public class ProjectContentActivity
 
         presenter.onDestroy();
     }
-
+*/
     @Override
     public void onDataUpdated(ProjectContentViewModel viewModel) {
         //Log.e(TAG, "onDataUpdated()");
 
         // deal with the data
-        ((TextView) findViewById(R.id.data)).setText(viewModel.data);
+        //((TextView) findViewById(R.id.data)).setText(viewModel.data);
     }
 
 

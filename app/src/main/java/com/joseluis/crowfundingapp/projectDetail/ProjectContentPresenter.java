@@ -1,5 +1,7 @@
 package com.joseluis.crowfundingapp.projectDetail;
 
+import com.joseluis.crowfundingapp.app.AppMediator;
+
 import java.lang.ref.WeakReference;
 
 public class ProjectContentPresenter implements ProjectContentContract.Presenter {
@@ -13,10 +15,10 @@ public class ProjectContentPresenter implements ProjectContentContract.Presenter
 
     public ProjectContentPresenter(AppMediator mediator) {
         this.mediator = mediator;
-        state = mediator.getProjectContentState();
+        //state = mediator.getProjectContentState();
     }
 
-    @Override
+/*    @Override
     public void onStart() {
         // Log.e(TAG, "onStart()");
 
@@ -36,17 +38,17 @@ public class ProjectContentPresenter implements ProjectContentContract.Presenter
             // update the state if is necessary
             state.data = savedState.data;
         }
-    }
+    }*/
 
-    @Override
+/*    @Override
     public void onRestart() {
         // Log.e(TAG, "onRestart()");
 
         // update the model if is necessary
         model.onRestartScreen(state.data);
-    }
+    }*/
 
-    @Override
+    /*@Override
     public void onResume() {
         // Log.e(TAG, "onResume()");
 
@@ -109,5 +111,5 @@ public class ProjectContentPresenter implements ProjectContentContract.Presenter
     public void injectModel(ProjectContentContract.Model model) {
         this.model = model;
     }
-
+*/
 }

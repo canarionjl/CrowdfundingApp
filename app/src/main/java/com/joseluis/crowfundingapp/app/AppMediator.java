@@ -5,7 +5,7 @@ public class AppMediator {
 
     private static AppMediator INSTANCE;
 
-    private CrowdfundingState mCrowdfundingState;
+    //private CrowdfundingState mCrowdfundingState;
 
 
     private AppMediator() {
@@ -25,7 +25,7 @@ public class AppMediator {
     public static void resetInstance() {
         INSTANCE = null;
     }
-
+/*
     public CrowdfundingState getCrowdfundingState() {
         return mCrowdfundingState;
     }
@@ -45,5 +45,5 @@ public class AppMediator {
 
     public PreviousToCrowdfundingState getPreviousCrowdfundingScreenState() {
         return null;
-    }
+    }*/
 }

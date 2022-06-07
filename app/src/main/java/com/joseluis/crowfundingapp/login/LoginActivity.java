@@ -6,32 +6,34 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.joseluis.crowfundingapp.R;
+
 public class LoginActivity
-        extends AppCompatActivity implements LoginActivityContract.View {
+        extends AppCompatActivity implements LoginContract.View {
 
     public static String TAG = LoginActivity.class.getSimpleName();
 
-    private LoginActivityContract.Presenter presenter;
+    //private LoginActivityContract.Presenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        getSupportActionBar().setTitle(R.string.app_name);
+        //getSupportActionBar().setTitle(R.string.app_name);
 
 
         // do the setup
-        LoginActivityScreen.configure(this);
+        //LoginScreen.configure(this);
 
-        if (savedInstanceState == null) {
-            presenter.onStart();
+       // if (savedInstanceState == null) {
+            //presenter.onStart();
 
-        } else {
-            presenter.onRestart();
-        }
+       // } else {
+           // presenter.onRestart();
+        //}
     }
 
-    @Override
+/*    @Override
     protected void onResume() {
         super.onResume();
 
@@ -78,5 +80,5 @@ public class LoginActivity
     @Override
     public void injectPresenter(LoginActivityContract.Presenter presenter) {
         this.presenter = presenter;
-    }
+    }*/
 }

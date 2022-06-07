@@ -8,5 +8,5 @@
         android:icon="@drawable/exit_icon"
         android:title="exit"
         app:showAsAction="always" />
-    <menu />
+
 </menu>

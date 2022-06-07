@@ -13,7 +13,7 @@ public class RegisterActivity
 
     private RegisterContract.Presenter presenter;
 
-    @Override
+/*    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_);
@@ -58,14 +58,14 @@ public class RegisterActivity
         super.onDestroy();
 
         presenter.onDestroy();
-    }
+    }*/
 
     @Override
     public void onDataUpdated(RegisterViewModel viewModel) {
         //Log.e(TAG, "onDataUpdated()");
 
         // deal with the data
-        ((TextView) findViewById(R.id.data)).setText(viewModel.data);
+       // ((TextView) findViewById(R.id.data)).setText(viewModel.data);
     }
 
 

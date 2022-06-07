@@ -4,16 +4,17 @@ import java.lang.ref.WeakReference;
 
 public interface LoginContract {
 
+
     interface View {
-        void injectPresenter(Presenter presenter);
+       /* void injectPresenter(Presenter presenter);
 
         void onDataUpdated(LoginViewModel viewModel);
 
-        void navigateToNextScreen();
+        void navigateToNextScreen();*/
     }
 
     interface Presenter {
-        void injectView(WeakReference<View> view);
+      /*  void injectView(WeakReference<View> view);
 
         void injectModel(Model model);
 
@@ -27,17 +28,17 @@ public interface LoginContract {
 
         void onPause();
 
-        void onDestroy();
+        void onDestroy();*/
     }
 
     interface Model {
-        String getStoredData();
+       /* String getStoredData();
 
         void onDataFromNextScreen(String data);
 
         void onRestartScreen(String data);
 
-        void onDataFromPreviousScreen(String data);
+        void onDataFromPreviousScreen(String data);*/
     }
 
 }

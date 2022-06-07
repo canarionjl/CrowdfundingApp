@@ -13,7 +13,7 @@ public interface ProjectContentContract {
     }
 
     interface Presenter {
-        void injectView(WeakReference<View> view);
+    /*    void injectView(WeakReference<View> view);
 
         void injectModel(Model model);
 
@@ -27,7 +27,7 @@ public interface ProjectContentContract {
 
         void onPause();
 
-        void onDestroy();
+        void onDestroy();*/
     }
 
     interface Model {

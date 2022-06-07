@@ -22,7 +22,7 @@ public class ProjectListActivity
         getSupportActionBar().setTitle(R.string.app_name);
 
 
-        // do the setup
+    /*    // do the setup
         ProjectListScreen.configure(this);
 
         if (savedInstanceState == null) {
@@ -61,13 +61,13 @@ public class ProjectListActivity
 
         presenter.onDestroy();
     }
-
-    @Override
+*/
+/*    @Override
     public void onDataUpdated(ProjectListViewModel viewModel) {
         //Log.e(TAG, "onDataUpdated()");
 
         // deal with the data
-        ((TextView) findViewById(R.id.data)).setText(viewModel.data);
+        //((TextView) findViewById(R.id.data)).setText(viewModel.data);
     }
 
 
@@ -80,5 +80,6 @@ public class ProjectListActivity
     @Override
     public void injectPresenter(ProjectListContract.Presenter presenter) {
         this.presenter = presenter;
+    }*/
     }
 }

@@ -9,7 +9,7 @@ public class LoginPresenter implements LoginContract.Presenter {
     private WeakReference<LoginContract.View> view;
     private LoginState state;
     private LoginContract.Model model;
-    private AppMediator mediator;
+    /*private AppMediator mediator;
 
     public LoginPresenter(AppMediator mediator) {
         this.mediator = mediator;
@@ -108,6 +108,6 @@ public class LoginPresenter implements LoginContract.Presenter {
     @Override
     public void injectModel(LoginContract.Model model) {
         this.model = model;
-    }
+    }*/
 
 }

@@ -11,7 +11,7 @@ public class ProjectListScreen {
         WeakReference<FragmentActivity> context =
                 new WeakReference<>((FragmentActivity) view);
 
-        String data = context.get().getString(R.string.app_name);
+      /*  String data = context.get().getString(R.string.app_name);
 
         AppMediator mediator = AppMediator.getInstance();
 
@@ -21,6 +21,6 @@ public class ProjectListScreen {
         presenter.injectView(new WeakReference<>(view));
 
         view.injectPresenter(presenter);
-
+*/
     }
 }

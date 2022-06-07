@@ -9,7 +9,7 @@ public class ProjectListPresenter implements ProjectListContract.Presenter {
     private WeakReference<ProjectListContract.View> view;
     private ProjectListState state;
     private ProjectListContract.Model model;
-    private AppMediator mediator;
+/*    private AppMediator mediator;
 
     public ProjectListPresenter(AppMediator mediator) {
         this.mediator = mediator;
@@ -108,6 +108,6 @@ public class ProjectListPresenter implements ProjectListContract.Presenter {
     @Override
     public void injectModel(ProjectListContract.Model model) {
         this.model = model;
-    }
+    }*/
 
 }

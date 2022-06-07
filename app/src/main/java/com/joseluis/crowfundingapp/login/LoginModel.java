@@ -10,7 +10,7 @@ public class LoginModel implements LoginContract.Model {
         this.data = data;
     }
 
-    @Override
+    /*@Override
     public String getStoredData() {
         // Log.e(TAG, "getStoredData()");
         return data;
@@ -29,5 +29,5 @@ public class LoginModel implements LoginContract.Model {
     @Override
     public void onDataFromPreviousScreen(String data) {
         // Log.e(TAG, "onDataFromPreviousScreen()");
-    }
+    }*/
 }
