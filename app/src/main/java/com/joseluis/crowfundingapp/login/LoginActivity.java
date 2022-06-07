@@ -3,6 +3,7 @@ package com.joseluis.crowfundingapp.login;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
+import android.widget.Toolbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -13,12 +14,18 @@ public class LoginActivity
 
     public static String TAG = LoginActivity.class.getSimpleName();
 
+    Toolbar toolbar;
+
     //private LoginActivityContract.Presenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+         toolbar = findViewById(R.id.toolbarLoginActivity);
+        //setActionBar(toolbar);
+        //getActionBar().setTitle("LOGIN");
         //getSupportActionBar().setTitle(R.string.app_name);
 
 
@@ -32,6 +39,7 @@ public class LoginActivity
            // presenter.onRestart();
         //}
     }
+
 
 /*    @Override
     protected void onResume() {
