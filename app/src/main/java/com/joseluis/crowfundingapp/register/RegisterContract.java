@@ -1,19 +1,22 @@
 package com.joseluis.crowfundingapp.register;
 
+import com.joseluis.crowfundingapp.data.UserItem;
+
 import java.lang.ref.WeakReference;
+import java.util.ArrayList;
 
 public interface RegisterContract {
 
     interface View {
-     /*   void injectPresenter(Presenter presenter);
+       void injectPresenter(Presenter presenter);
 
         void onDataUpdated(RegisterViewModel viewModel);
 
-        void navigateToNextScreen();*/
+        void navigateToLoginScreen();
     }
 
     interface Presenter {
-      /*  void injectView(WeakReference<View> view);
+       void injectView(WeakReference<View> view);
 
         void injectModel(Model model);
 
@@ -23,21 +26,22 @@ public interface RegisterContract {
 
         void onRestart();
 
-        void onBackPressed();
-
         void onPause();
 
-        void onDestroy();*/
+        void onDestroy();
+
+        void updateStateFromScreen(String username, String password, String email);
+
+        void setUpdatedListFromModel(ArrayList<UserItem> listUsers);
+
+        void onRegisterButtonClicked();
     }
 
     interface Model {
-        String getStoredData();
+        void getUsersList();
 
-        void onDataFromNextScreen(String data);
+        void insertUser(String username, String password, String email);
 
-        void onRestartScreen(String data);
-
-        void onDataFromPreviousScreen(String data);
     }
 
 }

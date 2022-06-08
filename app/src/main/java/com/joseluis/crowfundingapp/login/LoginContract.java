@@ -48,7 +48,6 @@ public interface LoginContract {
         
         ArrayList<UserItem> getUsersList();
 
-        void insertUser();
     }
 
 }

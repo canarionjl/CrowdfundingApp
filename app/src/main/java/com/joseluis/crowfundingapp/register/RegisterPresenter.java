@@ -1,11 +1,22 @@
 package com.joseluis.crowfundingapp.register;
 
+import android.util.Log;
+
 import com.joseluis.crowfundingapp.app.AppMediator;
+import com.joseluis.crowfundingapp.data.UserItem;
 
 import java.lang.ref.WeakReference;
+import java.util.ArrayList;
+import java.util.List;
 
 public class RegisterPresenter implements RegisterContract.Presenter {
 
+    private static final String USERNAME_NOT_VALID =  "El nombre de usuario ya existe" ;
+    private static final String EMAIL_NOT_VALID = "Formato de correo electrónico incorrecto ";
+    private static final String USERNAME_INVALID_FORMAT = "Formato de nombre de usuario incorrecto";
+    private static final String PASSWORD_INVALID_FORMAT = "Formato de contraseña incorrecto" ;
+    private static final String ALL_INPUTS_CORRECTS = "Se ha registrado correctamente";
+    private static String REGISTER_INFORMATION;
     public static String TAG = RegisterPresenter.class.getSimpleName();
 
     private WeakReference<RegisterContract.View> view;
@@ -15,29 +26,12 @@ public class RegisterPresenter implements RegisterContract.Presenter {
 
     public RegisterPresenter(AppMediator mediator) {
         this.mediator = mediator;
-        //state = mediator.getRegisterState();
+        state = mediator.getRegisterState();
     }
-/*
+
     @Override
     public void onStart() {
-        // Log.e(TAG, "onStart()");
-
-        // initialize the state
         state = new RegisterState();
-
-        // call the model and update the state
-        state.data = model.getStoredData();
-
-       *//* // use passed state if is necessary
-        PreviousToRegisterState savedState = getStateFromPreviousScreen();
-        if (savedState != null) {
-
-            // update the model if is necessary
-            model.onDataFromPreviousScreen(savedState.data);
-
-            // update the state if is necessary
-            state.data = savedState.data;*//*
-        }
     }
 
     @Override
@@ -45,35 +39,20 @@ public class RegisterPresenter implements RegisterContract.Presenter {
         // Log.e(TAG, "onRestart()");
 
         // update the model if is necessary
-        model.onRestartScreen(state.data);
+        //model.onRestartScreen(state.data);
     }
 
     @Override
     public void onResume() {
-      *//*  // Log.e(TAG, "onResume()");
 
-        // use passed state if is necessary
-        NextToRegisterState savedState = getStateFromNextScreen();
-        if (savedState != null) {
+        model.getUsersList();
 
-            // update the model if is necessary
-            model.onDataFromNextScreen(savedState.data);
+        state.emailInput="";
+        state.passwordInput="";
+        state.usernameInput="";
+        state.information_text="";
 
-            // update the state if is necessary
-            state.data = savedState.data;*//*
-        }
-
-        // call the model and update the state
-        //state.data = model.getStoredData();
-
-        // update the view
         view.get().onDataUpdated(state);
-
-    }
-
-    @Override
-    public void onBackPressed() {
-        // Log.e(TAG, "onBackPressed()");
     }
 
     @Override
@@ -86,21 +65,67 @@ public class RegisterPresenter implements RegisterContract.Presenter {
         // Log.e(TAG, "onDestroy()");
     }
 
-*//*    private NextToRegisterState getStateFromNextScreen() {
-        return mediator.getNextRegisterScreenState();
+    @Override
+    public void updateStateFromScreen(String username, String password, String email) {
+        state.usernameInput=username;
+        state.passwordInput=password;
+        state.emailInput=email;
     }
 
-    private void passStateToNextScreen(RegisterToNextState state) {
-        mediator.setNextRegisterScreenState(state);
+    @Override
+    public void setUpdatedListFromModel(ArrayList<UserItem> listUsers){
+        state.userList=listUsers;
     }
 
-    private void passStateToPreviousScreen(RegisterToPreviousState state) {
-        mediator.setPreviousRegisterScreenState(state);
+    @Override
+    public void onRegisterButtonClicked() {
+        if(inputDataCheck()){
+            model.insertUser(state.usernameInput, state.passwordInput,state.emailInput);
+
+            state.userList=null;
+            model.getUsersList();
+            while(state.userList==null);
+
+            for (UserItem userItem: state.userList){
+                Log.e(TAG,userItem.username+""+userItem.password);
+            }
+            state.passwordInput="";
+            state.emailInput="";
+            state.usernameInput="";
+        }
+
+        state.information_text=REGISTER_INFORMATION;
+        view.get().onDataUpdated(state);
     }
 
-    private PreviousToRegisterState getStateFromPreviousScreen() {
-        return mediator.getPreviousRegisterScreenState();
-    }*//*
+    public boolean inputDataCheck(){
+
+        if(state.userList==null){
+            REGISTER_INFORMATION="ERROR DESCONOCIDO";
+            return false;
+        }
+
+        if(state.usernameInput.length()<1||state.usernameInput.length()>15){
+            REGISTER_INFORMATION="Formato de nombre de usuario incorrecto";
+            return false;
+        }
+        for(int i=0;i<state.userList.size();i++){
+            if(state.userList.get(i).username.equals(state.usernameInput)) {
+                REGISTER_INFORMATION="El nombre de usuario ya existe";
+                return false;
+            }
+        }
+        if (!state.emailInput.contains("@")&&!state.emailInput.contains(".")&&state.emailInput.length()>5) {
+            REGISTER_INFORMATION="Formato de correo electrónico incorrecto";
+            return false;
+        }
+        if(state.passwordInput.length()<8) {
+            REGISTER_INFORMATION="Formato de contraseña incorrecto";
+            return false;
+        }
+        REGISTER_INFORMATION="Se ha registrado correctamente";
+        return true;
+    }
 
     @Override
     public void injectView(WeakReference<RegisterContract.View> view) {
@@ -110,6 +135,6 @@ public class RegisterPresenter implements RegisterContract.Presenter {
     @Override
     public void injectModel(RegisterContract.Model model) {
         this.model = model;
-    }*/
+    }
 
 }

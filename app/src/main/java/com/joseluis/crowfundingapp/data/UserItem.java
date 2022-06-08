@@ -15,7 +15,7 @@ public class UserItem {
         public String email;
         public String password;
 
-        public UserItem(String username, String email, String password) {
+        public UserItem(String username, String password, String email) {
                 this.username = username;
                 this.email = email;
                 this.password = password;

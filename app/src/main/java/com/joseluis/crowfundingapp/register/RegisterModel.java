@@ -1,33 +1,44 @@
 package com.joseluis.crowfundingapp.register;
 
+import android.util.Log;
+
+import com.joseluis.crowfundingapp.data.UserItem;
+import com.joseluis.crowfundingapp.database.RepositoryContract;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class RegisterModel implements RegisterContract.Model {
 
     public static String TAG = RegisterModel.class.getSimpleName();
 
-    private String data;
+    RepositoryContract repository;
+    RegisterContract.Presenter presenter;
 
-    public RegisterModel(String data) {
-        this.data = data;
+    List<UserItem> userList = new ArrayList<UserItem>();
+
+    public RegisterModel(RepositoryContract repository) {
+        this.repository=repository;
     }
 
-    @Override
-    public String getStoredData() {
-        // Log.e(TAG, "getStoredData()");
-        return data;
+    public void getUsersListFromRepository(){
+        repository.getUserList(new RepositoryContract.GetUserListCallback (){
+            @Override
+            public void setUserList(List<UserItem> users) {
+                if(users!=null) userList = (ArrayList<UserItem>) users;
+                presenter.setUpdatedListFromModel((ArrayList<UserItem>)users);
+            }
+        });
     }
 
-    @Override
-    public void onRestartScreen(String data) {
-        // Log.e(TAG, "onRestartScreen()");
-    }
+   
 
     @Override
-    public void onDataFromNextScreen(String data) {
-        // Log.e(TAG, "onDataFromNextScreen()");
+    public void insertUser(String username, String password, String email) {
+        repository.insertUser(new UserItem(username,password,email));
     }
 
-    @Override
-    public void onDataFromPreviousScreen(String data) {
-        // Log.e(TAG, "onDataFromPreviousScreen()");
+    public void injectPresenter (RegisterContract.Presenter presenter){
+        this.presenter=presenter;
     }
 }

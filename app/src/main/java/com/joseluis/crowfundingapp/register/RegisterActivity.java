@@ -1,7 +1,11 @@
 package com.joseluis.crowfundingapp.register;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,8 +19,11 @@ public class RegisterActivity
     public static String TAG = RegisterActivity.class.getSimpleName();
 
     Toolbar toolbar;
+    EditText usernameInput;
+    EditText passwordInput;
+    EditText emailInput;
 
-    //private RegisterContract.Presenter presenter;
+    private RegisterContract.Presenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,69 +33,83 @@ public class RegisterActivity
         toolbar = findViewById(R.id.toolbarRegisterActivity);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(R.string.title_toolbar_Register_Activity);
-        //getSupportActionBar().setTitle(R.string.app_name);
+
+        configureViewComponents();
+
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
 
-        // do the setup
-        //RegisterScreen.configure(this);
+        RegisterScreen.configure(this);
 
-       // if (savedInstanceState == null) {
-            //presenter.onStart();
-
-        //} else {
-            //presenter.onRestart();
-       // }
+        if (savedInstanceState == null) {
+            presenter.onStart();
+        } else {
+            presenter.onRestart();
+       }
     }
-/*
+
     @Override
     protected void onResume() {
         super.onResume();
-
-        // load the data
         presenter.onResume();
     }
 
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-
-        presenter.onBackPressed();
+        finish();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-
         presenter.onPause();
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-
         presenter.onDestroy();
-    }*/
-
-/*
-    @Override
-    public void onDataUpdated(RegisterViewModel viewModel) {
-        //Log.e(TAG, "onDataUpdated()");
-
-        // deal with the data
-       // ((TextView) findViewById(R.id.data)).setText(viewModel.data);
     }
 
 
     @Override
-    public void navigateToNextScreen() {
-        Intent intent = new Intent(this, RegisterActivity.class);
-        startActivity(intent);
+    public void onDataUpdated(RegisterViewModel viewModel) {
+        ((TextView)findViewById(R.id.textViewIncorrectData)).setText(viewModel.information_text);
+        usernameInput.setText(viewModel.usernameInput);
+        passwordInput.setText(viewModel.passwordInput);
+        emailInput.setText(viewModel.emailInput);
+    }
+
+    public void onRegisterButtonClicked(){
+        presenter.updateStateFromScreen(usernameInput.getText().toString(),passwordInput.getText().toString(),emailInput.getText().toString());
+        presenter.onRegisterButtonClicked();
+
+    }
+
+
+    @Override
+    public void navigateToLoginScreen() {
+
     }
 
     @Override
     public void injectPresenter(RegisterContract.Presenter presenter) {
-        //this.presenter = presenter;
+        this.presenter = presenter;
     }
 
- */
+    public void configureViewComponents(){
+        ((Button)findViewById(R.id.buttonRegister)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onRegisterButtonClicked();
+            }
+        });
+
+        usernameInput = findViewById(R.id.editTextRegisterUserName);
+        passwordInput = findViewById(R.id.editTextRegisterPassword);
+        emailInput = findViewById(R.id.editTextRegisterEmailAddress);
+    }
+
+
 }

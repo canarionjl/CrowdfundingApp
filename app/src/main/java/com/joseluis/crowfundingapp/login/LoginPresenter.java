@@ -105,12 +105,13 @@ public class LoginPresenter implements LoginContract.Presenter {
 
     public boolean isUserCorrect(){
 
-        //Log.e(TAG, state.usernameInput+" "+state.passwordInput);
+        Log.e(TAG, state.usernameInput+" "+state.passwordInput);
         //model.insertUser();
         state.userList=model.getUsersList();
         boolean userFound=false;
         if(state.userList!=null && state.userList.size()>0){
             for(int i=0;i<state.userList.size();i++){
+                Log.i(TAG,state.userList.get(i).username+ " "+state.userList.get(i).password);
                 if((state.userList.get(i).username).equals(state.usernameInput)){
                     if(state.userList.get(i).password.equals(state.passwordInput)){
                         userFound = true;

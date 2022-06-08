@@ -34,9 +34,4 @@ public class LoginModel implements LoginContract.Model {
         getUsersListFromRepository();
         return (ArrayList<UserItem>) userList;
     }
-
-    @Override
-    public void insertUser () {
-        repository.insertUser(new UserItem("jose","jose","jose"));
-    }
 }
