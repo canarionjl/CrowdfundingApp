@@ -20,7 +20,6 @@ public class LoginModel implements LoginContract.Model {
     }
 
     //cada vez que queramos los datos desde el presenter realizamos una llamada a la BB.DD. para obtener los datos actualizados
-
     public void getUsersListFromRepository(){
         repository.getUserList(new RepositoryContract.GetUserListCallback (){
             @Override
@@ -32,6 +31,12 @@ public class LoginModel implements LoginContract.Model {
 
     @Override
     public ArrayList<UserItem> getUsersList(){
+        getUsersListFromRepository();
         return (ArrayList<UserItem>) userList;
+    }
+
+    @Override
+    public void insertUser () {
+        repository.insertUser(new UserItem("jose","jose","jose"));
     }
 }

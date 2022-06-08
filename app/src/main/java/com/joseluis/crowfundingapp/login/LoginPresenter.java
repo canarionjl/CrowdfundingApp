@@ -3,8 +3,11 @@ package com.joseluis.crowfundingapp.login;
 
 import static androidx.core.content.res.TypedArrayUtils.getString;
 
+import android.util.Log;
+
 import com.joseluis.crowfundingapp.R;
 import com.joseluis.crowfundingapp.app.AppMediator;
+import com.joseluis.crowfundingapp.app.LoginToProjectListState;
 
 import java.lang.ref.WeakReference;
 
@@ -25,83 +28,41 @@ public class LoginPresenter implements LoginContract.Presenter {
 
     @Override
     public void onStart() {
-
         state.userList=model.getUsersList();
-        // use passed state if is necessary
-        //      PreviousToLoginState savedState = getStateFromPreviousScreen();
-       /* if (savedState != null) {
-
-            // update the model if is necessary
-            model.onDataFromPreviousScreen(savedState.data);
-
-            // update the state if is necessary
-            state.data = savedState.data;
-        }*/
     }
 
     @Override
     public void onRestart() {
-        // Log.e(TAG, "onRestart()");
-
-        // update the model if is necessary
-        //model.onRestartScreen(state.data);
     }
 
     @Override
     public void onResume() {
-        // Log.e(TAG, "onResume()");
+       state.informationText="";
+       state.usernameInput="";
+       state.passwordInput="";
 
-      /*  // use passed state if is necessary
-        NextToLoginState savedState = getStateFromNextScreen();
-        if (savedState != null) {
-
-            // update the model if is necessary
-            model.onDataFromNextScreen(savedState.data);
-
-            // update the state if is necessary
-            state.data = savedState.data;
-        }
-
-        // call the model and update the state
-        //state.data = model.getStoredData();
-
-        // update the view
-        view.get().onDataUpdated(state);*/
-
+       view.get().onDataUpdated(state);
     }
 
     @Override
     public void onBackPressed() {
-        // Log.e(TAG, "onBackPressed()");
     }
 
     @Override
     public void onPause() {
-        // Log.e(TAG, "onPause()");
+        view.get().getEditTextContent();
     }
 
     @Override
     public void onDestroy() {
-        // Log.e(TAG, "onDestroy()");
-    }
-/*
-    private NextToLoginState getStateFromNextScreen() {
-        return mediator.getNextLoginScreenState();
+
     }
 
-    private void passStateToNextScreen(LoginToNextState state) {
-        mediator.setNextLoginScreenState(state);
+    @Override
+    public void updateStateFromScreen(String username, String password){
+        state.usernameInput=username;
+        state.passwordInput=password;
     }
-
-    private void passStateToPreviousScreen(LoginToPreviousState state) {
-        mediator.setPreviousLoginScreenState(state);
-    }
-
-    private PreviousToLoginState getStateFromPreviousScreen() {
-        return mediator.getPreviousLoginScreenState();
-    }*/
-
-
 
     @Override
     public void injectModel(LoginContract.Model model) {
@@ -114,8 +75,10 @@ public class LoginPresenter implements LoginContract.Presenter {
 
     @Override
     public void onTextViewGuestAccessClicked(){
-
+        state.loggedUser = null;
+        navigateToProjectsListScreen();
     }
+
     @Override
     public void onRegisterTextClicked(){
         view.get().navigateToRegisterScreen();
@@ -129,27 +92,34 @@ public class LoginPresenter implements LoginContract.Presenter {
             state.informationText = LOGIN_ERROR;
             state.usernameInput="";
             state.passwordInput="";
+            view.get().onDataUpdated(state);
         }
     }
 
-    public void navigateToProjectsListScreen(){
-        // rellenar mañana
+    public void navigateToProjectsListScreen() {
+        LoginToProjectListState newState = new LoginToProjectListState();
+        newState.userItem=state.loggedUser;
+        mediator.setLoginToProjectListState(newState);
+        view.get().navigateToRegisterScreen(); //debería ser ProjectList --> se puso register para prueba
     }
 
     public boolean isUserCorrect(){
-        boolean userFound;
-        if(state.userList!=null && state.userList.size()!=0){
+
+        //Log.e(TAG, state.usernameInput+" "+state.passwordInput);
+        //model.insertUser();
+        state.userList=model.getUsersList();
+        boolean userFound=false;
+        if(state.userList!=null && state.userList.size()>0){
             for(int i=0;i<state.userList.size();i++){
-                if((state.userList.get(i).username).equals(state.usernameInput){
+                if((state.userList.get(i).username).equals(state.usernameInput)){
                     if(state.userList.get(i).password.equals(state.passwordInput)){
                         userFound = true;
                         state.loggedUser=state.userList.get(i);
                     }
                 }
             }
-        }else{
-            userFound=false;
-        }
+        }else{ }
+
         return userFound;
     }
 

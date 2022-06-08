@@ -152,6 +152,17 @@ public class CrowdfundingRepository implements RepositoryContract {
         });
     }
 
+    public void insertUser( final UserItem user) {
+
+        AsyncTask.execute(new Runnable() {
+
+            @Override
+            public void run() {
+              getUserDao().insertUser(user);
+            }
+        });
+    }
+
     @Override
     public void updateUser(
             final UserItem User, final UpdateUserCallback callback) {

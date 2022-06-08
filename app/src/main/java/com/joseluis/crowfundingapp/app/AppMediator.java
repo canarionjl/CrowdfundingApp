@@ -9,9 +9,8 @@ public class AppMediator {
 
     private LoginState loginState = new LoginState();
 
-    public LoginState getLoginState() {
-        return loginState;
-    }
+    private LoginToProjectListState loginToProjectListState;
+
 
     private AppMediator() {}
 
@@ -19,12 +18,25 @@ public class AppMediator {
         if (INSTANCE == null) {
             INSTANCE = new AppMediator();
         }
-
         return INSTANCE;
     }
 
     public static void resetInstance() {
         INSTANCE = null;
+    }
+
+    public LoginState getLoginState() {
+        return loginState;
+    }
+
+    public LoginToProjectListState getLoginToProjectListState() {
+        LoginToProjectListState state = loginToProjectListState;
+        loginToProjectListState=null;
+        return state;
+    }
+
+    public void setLoginToProjectListState(LoginToProjectListState loginToProjectListState) {
+        this.loginToProjectListState = loginToProjectListState;
     }
 /*
     public CrowdfundingState getCrowdfundingState() {

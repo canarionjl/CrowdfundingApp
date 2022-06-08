@@ -9,15 +9,16 @@ public interface LoginContract {
 
 
     interface View {
-       void injectPresenter(Presenter presenter);
+        void onDataUpdated(LoginViewModel viewModel);
+
+        void injectPresenter(Presenter presenter);
+
+        void getEditTextContent();
 
         void navigateToRegisterScreen();
 
         void navigateToProjectsListScreen();
-        /*
-        void onDataUpdated(LoginViewModel viewModel);
 
-        void navigateToNextScreen();*/
     }
 
     interface Presenter {
@@ -25,6 +26,9 @@ public interface LoginContract {
         void onLoginButtonClicked();
         void onRegisterTextClicked();
         void onTextViewGuestAccessClicked();
+
+        void updateStateFromScreen(String username, String password);
+
         void injectModel(Model model);
 
         void onResume();
@@ -43,7 +47,8 @@ public interface LoginContract {
     interface Model {
         
         ArrayList<UserItem> getUsersList();
-     
+
+        void insertUser();
     }
 
 }
