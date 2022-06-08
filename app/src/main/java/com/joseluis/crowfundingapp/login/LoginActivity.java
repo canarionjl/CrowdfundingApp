@@ -2,12 +2,17 @@ package com.joseluis.crowfundingapp.login;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toolbar;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.joseluis.crowfundingapp.R;
+import com.joseluis.crowfundingapp.register.RegisterActivity;
 
 public class LoginActivity
         extends AppCompatActivity implements LoginContract.View {
@@ -16,28 +21,26 @@ public class LoginActivity
 
     Toolbar toolbar;
 
-    //private LoginActivityContract.Presenter presenter;
+    private LoginContract.Presenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-         toolbar = findViewById(R.id.toolbarLoginActivity);
-        //setActionBar(toolbar);
-        //getActionBar().setTitle("LOGIN");
-        //getSupportActionBar().setTitle(R.string.app_name);
+        toolbar = findViewById(R.id.toolbarLoginActivity);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle(R.string.title_toolbar_Login_Activity);
 
+        LoginScreen.configure(this);
 
-        // do the setup
-        //LoginScreen.configure(this);
+        setOnClickListeners();
 
-       // if (savedInstanceState == null) {
-            //presenter.onStart();
-
-       // } else {
-           // presenter.onRestart();
-        //}
+       if (savedInstanceState == null) {
+           //presenter.onStart();
+       } else {
+          // presenter.onRestart();
+       }
     }
 
 
@@ -84,9 +87,48 @@ public class LoginActivity
         Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
     }
-
+*/
     @Override
-    public void injectPresenter(LoginActivityContract.Presenter presenter) {
+    public void injectPresenter(LoginContract.Presenter presenter) {
         this.presenter = presenter;
-    }*/
+    }
+    public void onTextViewGuestAccessClicked(){
+
+    }
+    public void onRegisterTextClicked(){
+        presenter.onRegisterTextClicked();
+    }
+
+    public void onLoginButtonClicked(){
+        presenter.onLoginButtonClicked();
+    }
+
+    public void navigateToRegisterScreen(){
+        Log.e(TAG,"AQUI");
+        Intent intent = new Intent(this,RegisterActivity.class);
+        startActivity(intent);
+    }
+
+    public void setOnClickListeners(){
+        ((TextView) findViewById(R.id.textViewGuestAccess)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onTextViewGuestAccessClicked();
+            }
+        });
+        ((TextView) findViewById(R.id.textLoginRegister)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onRegisterTextClicked();
+            }
+        });
+
+        ((Button)findViewById(R.id.buttonLogin)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onLoginButtonClicked();
+            }
+        });
+
+    }
 }

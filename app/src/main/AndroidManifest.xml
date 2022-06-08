@@ -23,6 +23,16 @@ package="com.joseluis.crowfundingapp">
             <category android:name="android.intent.category.LAUNCHER" />
         </intent-filter>
     </activity>
+
+    <activity
+        android:name=".register.RegisterActivity"
+        android:parentActivityName=".login.LoginActivity"
+        android:exported="true">
+    <meta-data
+        android:name="android.support.PARENT_ACTIVITY"
+        android:value=".login.LoginActivity"/>
+        >
+    </activity>
 </application>
 
 </manifest>

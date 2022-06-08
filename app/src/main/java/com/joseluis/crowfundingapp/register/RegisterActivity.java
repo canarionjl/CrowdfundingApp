@@ -5,32 +5,41 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
+import com.joseluis.crowfundingapp.R;
 
 public class RegisterActivity
         extends AppCompatActivity implements RegisterContract.View {
 
     public static String TAG = RegisterActivity.class.getSimpleName();
 
-    private RegisterContract.Presenter presenter;
+    Toolbar toolbar;
 
-/*    @Override
+    //private RegisterContract.Presenter presenter;
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_);
-        getSupportActionBar().setTitle(R.string.app_name);
+        setContentView(R.layout.activity_register);
+
+        toolbar = findViewById(R.id.toolbarRegisterActivity);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle(R.string.title_toolbar_Register_Activity);
+        //getSupportActionBar().setTitle(R.string.app_name);
 
 
         // do the setup
-        RegisterScreen.configure(this);
+        //RegisterScreen.configure(this);
 
-        if (savedInstanceState == null) {
-            presenter.onStart();
+       // if (savedInstanceState == null) {
+            //presenter.onStart();
 
-        } else {
-            presenter.onRestart();
-        }
+        //} else {
+            //presenter.onRestart();
+       // }
     }
-
+/*
     @Override
     protected void onResume() {
         super.onResume();
@@ -60,6 +69,7 @@ public class RegisterActivity
         presenter.onDestroy();
     }*/
 
+/*
     @Override
     public void onDataUpdated(RegisterViewModel viewModel) {
         //Log.e(TAG, "onDataUpdated()");
@@ -77,6 +87,8 @@ public class RegisterActivity
 
     @Override
     public void injectPresenter(RegisterContract.Presenter presenter) {
-        this.presenter = presenter;
+        //this.presenter = presenter;
     }
+
+ */
 }

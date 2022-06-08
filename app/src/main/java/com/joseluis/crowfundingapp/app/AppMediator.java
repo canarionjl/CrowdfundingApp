@@ -1,17 +1,19 @@
 package com.joseluis.crowfundingapp.app;
 
+import com.joseluis.crowfundingapp.login.LoginState;
+
 @SuppressWarnings("unused")
 public class AppMediator {
 
     private static AppMediator INSTANCE;
 
-    //private CrowdfundingState mCrowdfundingState;
+    private LoginState loginState = new LoginState();
 
-
-    private AppMediator() {
-
+    public LoginState getLoginState() {
+        return loginState;
     }
 
+    private AppMediator() {}
 
     public static AppMediator getInstance() {
         if (INSTANCE == null) {
@@ -21,7 +23,6 @@ public class AppMediator {
         return INSTANCE;
     }
 
-    // to reset the state when testing
     public static void resetInstance() {
         INSTANCE = null;
     }

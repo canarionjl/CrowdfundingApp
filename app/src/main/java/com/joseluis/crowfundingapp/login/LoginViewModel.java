@@ -1,7 +1,7 @@
 package com.joseluis.crowfundingapp.login;
 
 public class LoginViewModel {
-
-    // put the view state here
-    public String data;
+    public String usernameInput;
+    public String passwordInput;
+    public String informationText;
 }

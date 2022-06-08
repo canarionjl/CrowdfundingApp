@@ -1,6 +1,11 @@
 package com.joseluis.crowfundingapp.login;
 
+import com.joseluis.crowfundingapp.data.UserItem;
+
+import java.util.ArrayList;
+
 public class LoginState extends LoginViewModel {
 
-    // put the model state here
+    ArrayList<UserItem> userList;
+    UserItem loggedUser;
 }

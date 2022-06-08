@@ -1,33 +1,37 @@
 package com.joseluis.crowfundingapp.login;
 
+import com.joseluis.crowfundingapp.data.UserItem;
+import com.joseluis.crowfundingapp.database.CrowdfundingRepository;
+import com.joseluis.crowfundingapp.database.RepositoryContract;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class LoginModel implements LoginContract.Model {
 
     public static String TAG = LoginModel.class.getSimpleName();
 
-    private String data;
+    List<UserItem> userList = new ArrayList<UserItem>();
 
-    public LoginModel(String data) {
-        this.data = data;
+    RepositoryContract repository;
+
+    public LoginModel(RepositoryContract repository) {
+        this.repository=repository;
     }
 
-    /*@Override
-    public String getStoredData() {
-        // Log.e(TAG, "getStoredData()");
-        return data;
-    }
+    //cada vez que queramos los datos desde el presenter realizamos una llamada a la BB.DD. para obtener los datos actualizados
 
-    @Override
-    public void onRestartScreen(String data) {
-        // Log.e(TAG, "onRestartScreen()");
-    }
-
-    @Override
-    public void onDataFromNextScreen(String data) {
-        // Log.e(TAG, "onDataFromNextScreen()");
+    public void getUsersListFromRepository(){
+        repository.getUserList(new RepositoryContract.GetUserListCallback (){
+            @Override
+            public void setUserList(List<UserItem> users) {
+                if(users!=null) userList = (ArrayList<UserItem>) users;
+            }
+        });
     }
 
     @Override
-    public void onDataFromPreviousScreen(String data) {
-        // Log.e(TAG, "onDataFromPreviousScreen()");
-    }*/
+    public ArrayList<UserItem> getUsersList(){
+        return (ArrayList<UserItem>) userList;
+    }
 }

@@ -5,11 +5,11 @@ import java.lang.ref.WeakReference;
 public interface RegisterContract {
 
     interface View {
-        void injectPresenter(Presenter presenter);
+     /*   void injectPresenter(Presenter presenter);
 
         void onDataUpdated(RegisterViewModel viewModel);
 
-        void navigateToNextScreen();
+        void navigateToNextScreen();*/
     }
 
     interface Presenter {
