@@ -8,8 +8,12 @@ import android.util.Log;
 import com.joseluis.crowfundingapp.R;
 import com.joseluis.crowfundingapp.app.AppMediator;
 import com.joseluis.crowfundingapp.app.LoginToProjectListState;
+import com.joseluis.crowfundingapp.data.UserItem;
+import com.joseluis.crowfundingapp.database.RepositoryContract;
 
 import java.lang.ref.WeakReference;
+import java.util.ArrayList;
+import java.util.List;
 
 public class LoginPresenter implements LoginContract.Presenter {
 
@@ -28,7 +32,6 @@ public class LoginPresenter implements LoginContract.Presenter {
 
     @Override
     public void onStart() {
-        state.userList=model.getUsersList();
     }
 
     @Override
@@ -37,6 +40,8 @@ public class LoginPresenter implements LoginContract.Presenter {
 
     @Override
     public void onResume() {
+        updateUserList();
+
        state.informationText="";
        state.usernameInput="";
        state.passwordInput="";
@@ -96,6 +101,17 @@ public class LoginPresenter implements LoginContract.Presenter {
         }
     }
 
+    @Override
+    public void updateUserList() {
+        model.getUsersList(new RepositoryContract.GetUserListCallback() {
+
+            @Override
+            public void setUserList(List<UserItem> users) {
+                state.userList = (ArrayList<UserItem>) users;
+            }
+        });
+    }
+
     public void navigateToProjectsListScreen() {
         LoginToProjectListState newState = new LoginToProjectListState();
         newState.userItem=state.loggedUser;
@@ -105,13 +121,12 @@ public class LoginPresenter implements LoginContract.Presenter {
 
     public boolean isUserCorrect(){
 
-        Log.e(TAG, state.usernameInput+" "+state.passwordInput);
-        //model.insertUser();
-        state.userList=model.getUsersList();
+        updateUserList();
+
         boolean userFound=false;
+
         if(state.userList!=null && state.userList.size()>0){
             for(int i=0;i<state.userList.size();i++){
-                Log.i(TAG,state.userList.get(i).username+ " "+state.userList.get(i).password);
                 if((state.userList.get(i).username).equals(state.usernameInput)){
                     if(state.userList.get(i).password.equals(state.passwordInput)){
                         userFound = true;
@@ -119,7 +134,8 @@ public class LoginPresenter implements LoginContract.Presenter {
                     }
                 }
             }
-        }else{ }
+
+        }else{}
 
         return userFound;
     }

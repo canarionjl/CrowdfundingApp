@@ -1,6 +1,7 @@
 package com.joseluis.crowfundingapp.register;
 
 import com.joseluis.crowfundingapp.data.UserItem;
+import com.joseluis.crowfundingapp.database.RepositoryContract;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -32,13 +33,13 @@ public interface RegisterContract {
 
         void updateStateFromScreen(String username, String password, String email);
 
-        void setUpdatedListFromModel(ArrayList<UserItem> listUsers);
+        void updateUserList();
 
         void onRegisterButtonClicked();
     }
 
     interface Model {
-        void getUsersList();
+        void getUsersList(RepositoryContract.GetUserListCallback callback);
 
         void insertUser(String username, String password, String email);
 

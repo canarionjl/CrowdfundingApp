@@ -1,7 +1,5 @@
 package com.joseluis.crowfundingapp.register;
 
-import android.util.Log;
-
 import com.joseluis.crowfundingapp.data.UserItem;
 import com.joseluis.crowfundingapp.database.RepositoryContract;
 
@@ -21,17 +19,18 @@ public class RegisterModel implements RegisterContract.Model {
         this.repository=repository;
     }
 
-    public void getUsersListFromRepository(){
+    public void getUsersList(RepositoryContract.GetUserListCallback callback){
+
         repository.getUserList(new RepositoryContract.GetUserListCallback (){
             @Override
             public void setUserList(List<UserItem> users) {
                 if(users!=null) userList = (ArrayList<UserItem>) users;
-                presenter.setUpdatedListFromModel((ArrayList<UserItem>)users);
+                callback.setUserList(users);
             }
         });
     }
 
-   
+
 
     @Override
     public void insertUser(String username, String password, String email) {

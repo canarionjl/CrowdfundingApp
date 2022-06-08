@@ -19,19 +19,14 @@ public class LoginModel implements LoginContract.Model {
         this.repository=repository;
     }
 
-    //cada vez que queramos los datos desde el presenter realizamos una llamada a la BB.DD. para obtener los datos actualizados
-    public void getUsersListFromRepository(){
+    public void getUsersList(RepositoryContract.GetUserListCallback callback){
+
         repository.getUserList(new RepositoryContract.GetUserListCallback (){
             @Override
             public void setUserList(List<UserItem> users) {
                 if(users!=null) userList = (ArrayList<UserItem>) users;
+                callback.setUserList(users);
             }
         });
-    }
-
-    @Override
-    public ArrayList<UserItem> getUsersList(){
-        getUsersListFromRepository();
-        return (ArrayList<UserItem>) userList;
     }
 }

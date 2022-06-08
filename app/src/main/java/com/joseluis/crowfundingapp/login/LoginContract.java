@@ -1,6 +1,7 @@
 package com.joseluis.crowfundingapp.login;
 
 import com.joseluis.crowfundingapp.data.UserItem;
+import com.joseluis.crowfundingapp.database.RepositoryContract;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -42,11 +43,13 @@ public interface LoginContract {
         void onPause();
 
         void onDestroy();
+
+        void updateUserList();
     }
 
     interface Model {
         
-        ArrayList<UserItem> getUsersList();
+        void getUsersList(RepositoryContract.GetUserListCallback callback);
 
     }
 

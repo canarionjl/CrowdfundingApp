@@ -4,6 +4,7 @@ import android.util.Log;
 
 import com.joseluis.crowfundingapp.app.AppMediator;
 import com.joseluis.crowfundingapp.data.UserItem;
+import com.joseluis.crowfundingapp.database.RepositoryContract;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -45,7 +46,7 @@ public class RegisterPresenter implements RegisterContract.Presenter {
     @Override
     public void onResume() {
 
-        model.getUsersList();
+        updateUserList();
 
         state.emailInput="";
         state.passwordInput="";
@@ -73,29 +74,31 @@ public class RegisterPresenter implements RegisterContract.Presenter {
     }
 
     @Override
-    public void setUpdatedListFromModel(ArrayList<UserItem> listUsers){
-        state.userList=listUsers;
-    }
+     public void updateUserList() {
+        state.userList = null;
 
+        model.getUsersList(new RepositoryContract.GetUserListCallback() {
+
+            @Override
+            public void setUserList(List<UserItem> users) {
+                state.userList = (ArrayList<UserItem>) users;
+            }
+        });
+    }
     @Override
     public void onRegisterButtonClicked() {
-        if(inputDataCheck()){
-            model.insertUser(state.usernameInput, state.passwordInput,state.emailInput);
+        if (inputDataCheck()) {
 
-            state.userList=null;
-            model.getUsersList();
-            while(state.userList==null);
+            model.insertUser(state.usernameInput, state.passwordInput, state.emailInput);
+            updateUserList();
 
-            for (UserItem userItem: state.userList){
-                Log.e(TAG,userItem.username+""+userItem.password);
-            }
-            state.passwordInput="";
-            state.emailInput="";
-            state.usernameInput="";
+            state.passwordInput = "";
+            state.emailInput = "";
+            state.usernameInput = "";
+
+            state.information_text = REGISTER_INFORMATION;
+            view.get().onDataUpdated(state);
         }
-
-        state.information_text=REGISTER_INFORMATION;
-        view.get().onDataUpdated(state);
     }
 
     public boolean inputDataCheck(){
