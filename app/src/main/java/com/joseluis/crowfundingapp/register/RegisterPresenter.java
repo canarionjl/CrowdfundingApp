@@ -58,12 +58,10 @@ public class RegisterPresenter implements RegisterContract.Presenter {
 
     @Override
     public void onPause() {
-        // Log.e(TAG, "onPause()");
     }
 
     @Override
     public void onDestroy() {
-        // Log.e(TAG, "onDestroy()");
     }
 
     @Override
@@ -96,7 +94,7 @@ public class RegisterPresenter implements RegisterContract.Presenter {
             state.emailInput = "";
             state.usernameInput = "";
 
-            state.information_text = REGISTER_INFORMATION;
+            state.information_text = "";
             view.get().onDataUpdated(state);
         }
     }

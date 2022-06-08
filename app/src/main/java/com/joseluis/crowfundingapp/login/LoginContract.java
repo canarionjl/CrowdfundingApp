@@ -38,8 +38,6 @@ public interface LoginContract {
 
         void onRestart();
 
-        void onBackPressed();
-
         void onPause();
 
         void onDestroy();

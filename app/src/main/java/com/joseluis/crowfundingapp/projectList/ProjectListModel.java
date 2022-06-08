@@ -1,33 +1,27 @@
 package com.joseluis.crowfundingapp.projectList;
 
+import com.joseluis.crowfundingapp.database.RepositoryContract;
+
 public class ProjectListModel implements ProjectListContract.Model {
 
     public static String TAG = ProjectListModel.class.getSimpleName();
 
-    private String data;
+    private RepositoryContract repository;
 
-    public ProjectListModel(String data) {
-        this.data = data;
+    public ProjectListModel(RepositoryContract repository) {
+        this.repository=repository;
     }
 
     @Override
-    public String getStoredData() {
-        // Log.e(TAG, "getStoredData()");
-        return data;
-    }
+    public void fetchCrowdfundingProjects(RepositoryContract.GetProjectListCallback callback){
 
-    @Override
-    public void onRestartScreen(String data) {
-        // Log.e(TAG, "onRestartScreen()");
-    }
-
-    @Override
-    public void onDataFromNextScreen(String data) {
-        // Log.e(TAG, "onDataFromNextScreen()");
-    }
-
-    @Override
-    public void onDataFromPreviousScreen(String data) {
-        // Log.e(TAG, "onDataFromPreviousScreen()");
+         repository.loadCrowdfundingProjectsList(true, new RepositoryContract.FetchCrowdfundingDataCallback() {
+            @Override
+            public void onCrowdfundingDataFetched(boolean error) {
+                if (!error) {
+                    repository.getProjectList(callback);
+                }
+            }
+        });
     }
 }

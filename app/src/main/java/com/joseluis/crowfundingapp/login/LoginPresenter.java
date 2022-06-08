@@ -50,10 +50,6 @@ public class LoginPresenter implements LoginContract.Presenter {
     }
 
     @Override
-    public void onBackPressed() {
-    }
-
-    @Override
     public void onPause() {
         view.get().getEditTextContent();
     }

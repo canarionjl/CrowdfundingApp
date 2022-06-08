@@ -1,19 +1,19 @@
 package com.joseluis.crowfundingapp.projectList;
 
+import com.joseluis.crowfundingapp.database.RepositoryContract;
+
 import java.lang.ref.WeakReference;
 
 public interface ProjectListContract {
 
     interface View {
-        /*void injectPresenter(Presenter presenter);
+        void injectPresenter(Presenter presenter);
 
         void onDataUpdated(ProjectListViewModel viewModel);
-
-        void navigateToNextScreen();*/
     }
 
     interface Presenter {
-/*        void injectView(WeakReference<View> view);
+       void injectView(WeakReference<View> view);
 
         void injectModel(Model model);
 
@@ -27,17 +27,11 @@ public interface ProjectListContract {
 
         void onPause();
 
-        void onDestroy();*/
+        void onDestroy();
     }
 
     interface Model {
-        String getStoredData();
-
-        void onDataFromNextScreen(String data);
-
-        void onRestartScreen(String data);
-
-        void onDataFromPreviousScreen(String data);
+        void fetchCrowdfundingProjects(RepositoryContract.GetProjectListCallback callback);
     }
 
 }

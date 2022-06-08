@@ -1,6 +1,7 @@
 package com.joseluis.crowfundingapp.app;
 
 import com.joseluis.crowfundingapp.login.LoginState;
+import com.joseluis.crowfundingapp.projectList.ProjectListState;
 import com.joseluis.crowfundingapp.register.RegisterState;
 
 @SuppressWarnings("unused")
@@ -9,8 +10,9 @@ public class AppMediator {
     private static AppMediator INSTANCE;
 
     private LoginState loginState = new LoginState();
-
     private RegisterState registerState = new RegisterState();
+
+    private ProjectListState projectListState = new ProjectListState();
 
     private LoginToProjectListState loginToProjectListState;
 
@@ -38,6 +40,15 @@ public class AppMediator {
 
     public void setRegisterState(RegisterState registerState) {
         this.registerState = registerState;
+    }
+
+
+    public ProjectListState getProjectListState() {
+        return projectListState;
+    }
+
+    public void setProjectListState(ProjectListState projectListState) {
+        this.projectListState = projectListState;
     }
 
     public LoginToProjectListState getLoginToProjectListState() {

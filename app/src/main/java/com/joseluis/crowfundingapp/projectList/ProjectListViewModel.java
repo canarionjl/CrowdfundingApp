@@ -1,7 +1,10 @@
 package com.joseluis.crowfundingapp.projectList;
 
+import com.joseluis.crowfundingapp.data.ProjectItem;
+
+import java.util.ArrayList;
+
 public class ProjectListViewModel {
 
-    // put the view state here
-    public String data;
+    ArrayList<ProjectItem> projectList;
 }

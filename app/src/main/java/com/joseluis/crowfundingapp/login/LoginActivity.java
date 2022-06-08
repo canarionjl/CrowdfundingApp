@@ -60,7 +60,6 @@ public class LoginActivity
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        presenter.onBackPressed();
     }
 
     @Override
@@ -78,7 +77,7 @@ public class LoginActivity
 
     @Override
     public void onDataUpdated(LoginViewModel viewModel) {
-        ((TextView) findViewById(R.id.textViewLoginErrorMessage)).setText(viewModel.informationText);
+        ((TextView)findViewById(R.id.textViewLoginErrorMessage)).setText(viewModel.informationText);
         userInput.setText(viewModel.usernameInput);
         passwordInput.setText(viewModel.passwordInput);
     }
@@ -90,9 +89,11 @@ public class LoginActivity
     public void injectPresenter(LoginContract.Presenter presenter) {
         this.presenter = presenter;
     }
-    public void onTextViewGuestAccessClicked(){
 
+    public void onTextViewGuestAccessClicked(){
+        presenter.onTextViewGuestAccessClicked();
     }
+
     public void onRegisterTextClicked(){
 
         presenter.onRegisterTextClicked();

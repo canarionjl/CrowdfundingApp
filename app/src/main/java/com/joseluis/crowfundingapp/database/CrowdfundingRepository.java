@@ -24,7 +24,7 @@ import java.util.List;
 public class CrowdfundingRepository implements RepositoryContract {
 
     public static final String DB_FILE = "crowdfunding.db";
-    public static final String JSON_FILE = "Crowdfunding.json";
+    public static final String JSON_FILE = "projects.json";
     public static final String JSON_ROOT = "projects";
     public static String TAG = CrowdfundingRepository.class.getSimpleName();
     private static CrowdfundingRepository INSTANCE;
@@ -51,8 +51,7 @@ public class CrowdfundingRepository implements RepositoryContract {
     }
 
     @Override
-    public void loadCrowdfundingProjectsList(
-            final boolean clearFirst, final FetchCrowdfundingDataCallback callback) {
+    public void loadCrowdfundingProjectsList(final boolean clearFirst, final FetchCrowdfundingDataCallback callback) {
 
         AsyncTask.execute(new Runnable() {
 

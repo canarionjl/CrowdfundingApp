@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.joseluis.crowfundingapp.R;
 
@@ -15,14 +16,18 @@ public class ProjectListActivity
 
     private ProjectListContract.Presenter presenter;
 
+    Toolbar toolbar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_project_list);
+
+        toolbar = findViewById(R.id.toolbarRecyclerActivity);
+        setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(R.string.app_name);
 
 
-    /*    // do the setup
         ProjectListScreen.configure(this);
 
         if (savedInstanceState == null) {
@@ -61,25 +66,17 @@ public class ProjectListActivity
 
         presenter.onDestroy();
     }
-*/
-/*    @Override
+
+   @Override
     public void onDataUpdated(ProjectListViewModel viewModel) {
-        //Log.e(TAG, "onDataUpdated()");
 
-        // deal with the data
-        //((TextView) findViewById(R.id.data)).setText(viewModel.data);
     }
 
 
-    @Override
-    public void navigateToNextScreen() {
-        Intent intent = new Intent(this, ProjectListActivity.class);
-        startActivity(intent);
-    }
 
     @Override
     public void injectPresenter(ProjectListContract.Presenter presenter) {
         this.presenter = presenter;
-    }*/
     }
+
 }

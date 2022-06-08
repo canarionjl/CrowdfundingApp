@@ -105,6 +105,12 @@ public class RegisterActivity
                 onRegisterButtonClicked();
             }
         });
+        ((TextView)findViewById(R.id.textLoginRegisterScreen)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
 
         usernameInput = findViewById(R.id.editTextRegisterUserName);
         passwordInput = findViewById(R.id.editTextRegisterPassword);
