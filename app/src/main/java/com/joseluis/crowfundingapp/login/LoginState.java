@@ -8,4 +8,5 @@ public class LoginState extends LoginViewModel {
 
     ArrayList<UserItem> userList;
     UserItem loggedUser;
+    boolean invitedUser;
 }

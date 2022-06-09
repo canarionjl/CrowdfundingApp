@@ -2,10 +2,14 @@ package com.joseluis.crowfundingapp.database;
 
 import com.joseluis.crowfundingapp.data.ProjectItem;
 import com.joseluis.crowfundingapp.data.UserItem;
+import com.joseluis.crowfundingapp.data.UserProjectJoinTable;
 
 import java.util.List;
 
 public interface RepositoryContract {
+
+
+    void getUserToProjectListWithId(int id, GetUserToProjectListCallback callback);
 
     interface FetchCrowdfundingDataCallback {
         void onCrowdfundingDataFetched(boolean error);
@@ -22,6 +26,11 @@ public interface RepositoryContract {
     interface GetProjectListCallback {
         void setProjectList(List<ProjectItem> projects);
     }
+
+    interface GetUserToProjectListCallback {
+        void setUserToProjectList(List<UserProjectJoinTable> projects);
+    }
+
 
     interface GetProjectCallback {
         void setProject(ProjectItem Project);

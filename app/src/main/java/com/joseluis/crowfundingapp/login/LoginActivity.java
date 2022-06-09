@@ -2,12 +2,14 @@ package com.joseluis.crowfundingapp.login;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.media.Image;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.HorizontalScrollView;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -144,6 +146,8 @@ public class LoginActivity
 
         userInput = findViewById(R.id.editTextLoginUserName);
         passwordInput = findViewById(R.id.editTextLoginPassword);
+
+        ((ImageView)findViewById(R.id.imageCrowdfundingIconLoginScreen)).setImageResource(R.drawable.crowdfunding_icon);
 
     }
 }

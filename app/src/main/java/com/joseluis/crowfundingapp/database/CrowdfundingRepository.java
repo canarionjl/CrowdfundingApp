@@ -11,6 +11,7 @@ import com.joseluis.crowfundingapp.data.UserItem;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.joseluis.crowfundingapp.data.UserProjectJoinTable;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -201,6 +202,20 @@ public class CrowdfundingRepository implements RepositoryContract {
         });
     }
 
+    @Override
+    public void getUserToProjectListWithId(int id, final GetUserToProjectListCallback callback) {
+        AsyncTask.execute(new Runnable() {
+
+            @Override
+            public void run() {
+                if (callback != null) {
+                    if(id>(-1)) callback.setUserToProjectList(getUserProjectJoinTableDao().loadUserProjectsWithUserId(id));
+                }
+            }
+        });
+    }
+
+
 
     private ProjectDao getProjectDao() {
         return database.projectDao();
@@ -209,6 +224,12 @@ public class CrowdfundingRepository implements RepositoryContract {
     private UserDao getUserDao() {
         return database.userDao();
     }
+
+
+    private UserProjectJoinTableDao getUserProjectJoinTableDao() {
+        return database.userProjectJoinTableDao();
+    }
+
 
 
     private boolean loadCrowdfundingFromJSON(String json) {

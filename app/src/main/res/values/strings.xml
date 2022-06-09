@@ -3,6 +3,7 @@
     <string name="login_button">LOGIN</string>
     <string name="title_toolbar_Login_Activity">LOGIN</string>
     <string name="title_toolbar_Register_Activity">REGISTRARSE</string>
+    <string name="title_toolbar_ProjectList_Activity">LISTA DE PROYECTOS</string>
     <string name="register_button">REGISTRARSE</string>
     <string name="register_message_login_screen">¿No tienes una cuenta? Regístrate aquí</string>
     <string name="login_message_at_register_screen">¿Ya tienes una cuenta? Inicia sesión aquí</string>
@@ -11,7 +12,4 @@
     <string name="Text_CardView_Button_SeeMore">VER MÁS</string>
     <string name="NotFavouriteButton">AÑADIR A FAVORITOS</string>
     <string name="FavouriteButton">ELIMINAR DE FAVORITOS</string>
-
-
-
 </resources>

@@ -18,7 +18,7 @@ import java.util.List;
 public class LoginPresenter implements LoginContract.Presenter {
 
     public static String TAG = LoginPresenter.class.getSimpleName();
-    public static String LOGIN_ERROR = "El usuario y/o la contraseña no son correctos";
+    public static String LOGIN_ERROR = "Usuario y/o contraseña incorrectos";
 
     private WeakReference<LoginContract.View> view;
     private LoginState state;
@@ -77,6 +77,7 @@ public class LoginPresenter implements LoginContract.Presenter {
     @Override
     public void onTextViewGuestAccessClicked(){
         state.loggedUser = null;
+        state.invitedUser=true;
         navigateToProjectsListScreen();
     }
 
@@ -88,6 +89,7 @@ public class LoginPresenter implements LoginContract.Presenter {
     @Override
     public void onLoginButtonClicked(){
         if(isUserCorrect()){
+            state.invitedUser=false;
             navigateToProjectsListScreen();
         }else{
             state.informationText = LOGIN_ERROR;
@@ -110,9 +112,12 @@ public class LoginPresenter implements LoginContract.Presenter {
 
     public void navigateToProjectsListScreen() {
         LoginToProjectListState newState = new LoginToProjectListState();
+
         newState.userItem=state.loggedUser;
+        newState.invitedUser=state.invitedUser;
+
         mediator.setLoginToProjectListState(newState);
-        view.get().navigateToProjectsListScreen(); //debería ser ProjectList --> se puso register para prueba
+        view.get().navigateToProjectsListScreen();
     }
 
     public boolean isUserCorrect(){

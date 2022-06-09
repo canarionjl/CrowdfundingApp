@@ -57,16 +57,33 @@ public class ProjectListAdapter extends RecyclerView.Adapter<ProjectListAdapter.
         holder.itemView.setTag(itemList.get(position));
         holder.itemView.setOnClickListener(clickListener);
 
-        holder.title.setText(itemList.get(position).title.toUpperCase(Locale.ROOT));
+        holder.title.setText(itemList.get(position).title.toUpperCase());
         holder.category.setText(itemList.get(position).category);
         holder.author.setText(itemList.get(position).author);
         //Glide.with(context).load(itemList.get(position).picture).into(holder.image);
-        holder.image.setImageResource(R.drawable.alarma_icon);
 
-
+        int resId = obtenerResIdToImage(itemList.get(position).category.toLowerCase());
+        holder.image.setImageResource(resId);
     }
 
-
+    public int obtenerResIdToImage(String category){
+        int resId;
+        switch (category) {
+            case "deportes":
+                resId = R.drawable.football_ball_icon;
+                break;
+            case "tecnología":
+                resId = R.drawable.technology_icon;
+                break;
+            case "música":
+                resId = R.drawable.nota_musical_icon;
+                break;
+            default:
+                resId = R.drawable.generic_idea_icon;
+                break;
+        }
+        return resId;
+    }
 
     class ViewHolder extends RecyclerView.ViewHolder {
         TextView title;

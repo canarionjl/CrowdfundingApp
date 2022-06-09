@@ -15,4 +15,5 @@ public abstract class CrowdfundingDatabase extends RoomDatabase {
     public abstract UserDao userDao();
     public abstract ProjectDao projectDao();
     public abstract UserProjectJoinTableDao userProjectJoinTableDao();
+
 }

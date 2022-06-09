@@ -7,4 +7,7 @@ import java.util.List;
 public class ProjectListViewModel {
 
     List<ProjectItem> projectList;
+    List<ProjectItem> favouriteList;
+
+    boolean favouriteListSelected;
 }

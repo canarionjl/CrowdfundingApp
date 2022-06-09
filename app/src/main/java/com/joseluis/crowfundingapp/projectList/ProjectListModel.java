@@ -2,13 +2,20 @@ package com.joseluis.crowfundingapp.projectList;
 
 import android.util.Log;
 
+import com.joseluis.crowfundingapp.data.ProjectItem;
+import com.joseluis.crowfundingapp.data.UserProjectJoinTable;
 import com.joseluis.crowfundingapp.database.RepositoryContract;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ProjectListModel implements ProjectListContract.Model {
 
     public static String TAG = ProjectListModel.class.getSimpleName();
 
     private RepositoryContract repository;
+
+    private ArrayList<ProjectItem> projectList;
 
     public ProjectListModel(RepositoryContract repository) {
         this.repository=repository;
@@ -26,4 +33,17 @@ public class ProjectListModel implements ProjectListContract.Model {
             }
         });
     }
+
+    @Override
+    public void getProjectsUserJoinList(int id, RepositoryContract.GetUserToProjectListCallback callback){
+        repository.getUserToProjectListWithId(id,new RepositoryContract.GetUserToProjectListCallback() {
+            @Override
+            public void setUserToProjectList(List<UserProjectJoinTable> favouriteProjects) {
+                callback.setUserToProjectList(favouriteProjects);
+            }
+        });
+
+
+    }
+
 }

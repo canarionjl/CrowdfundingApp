@@ -4,5 +4,5 @@ import com.joseluis.crowfundingapp.data.UserItem;
 
 public class LoginToProjectListState {
     public UserItem userItem;
-    boolean invited;
+    public boolean invitedUser;
 }

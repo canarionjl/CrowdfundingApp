@@ -12,11 +12,6 @@ import java.util.List;
 
 public class RegisterPresenter implements RegisterContract.Presenter {
 
-    private static final String USERNAME_NOT_VALID =  "El nombre de usuario ya existe" ;
-    private static final String EMAIL_NOT_VALID = "Formato de correo electrónico incorrecto ";
-    private static final String USERNAME_INVALID_FORMAT = "Formato de nombre de usuario incorrecto";
-    private static final String PASSWORD_INVALID_FORMAT = "Formato de contraseña incorrecto" ;
-    private static final String ALL_INPUTS_CORRECTS = "Se ha registrado correctamente";
     private static String REGISTER_INFORMATION;
     public static String TAG = RegisterPresenter.class.getSimpleName();
 
@@ -32,15 +27,11 @@ public class RegisterPresenter implements RegisterContract.Presenter {
 
     @Override
     public void onStart() {
-        state = new RegisterState();
     }
 
     @Override
     public void onRestart() {
-        // Log.e(TAG, "onRestart()");
 
-        // update the model if is necessary
-        //model.onRestartScreen(state.data);
     }
 
     @Override
@@ -93,10 +84,9 @@ public class RegisterPresenter implements RegisterContract.Presenter {
             state.passwordInput = "";
             state.emailInput = "";
             state.usernameInput = "";
-
-            state.information_text = "";
-            view.get().onDataUpdated(state);
         }
+        state.information_text = REGISTER_INFORMATION;
+        view.get().onDataUpdated(state);
     }
 
     public boolean inputDataCheck(){
@@ -116,7 +106,7 @@ public class RegisterPresenter implements RegisterContract.Presenter {
                 return false;
             }
         }
-        if (!state.emailInput.contains("@")&&!state.emailInput.contains(".")&&state.emailInput.length()>5) {
+        if (!state.emailInput.contains("@")||!state.emailInput.contains(".")||state.emailInput.length()<5) {
             REGISTER_INFORMATION="Formato de correo electrónico incorrecto";
             return false;
         }

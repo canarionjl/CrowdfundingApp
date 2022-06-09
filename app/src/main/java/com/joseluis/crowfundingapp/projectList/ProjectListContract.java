@@ -1,5 +1,8 @@
 package com.joseluis.crowfundingapp.projectList;
 
+import android.view.MenuItem;
+
+import com.joseluis.crowfundingapp.data.ProjectItem;
 import com.joseluis.crowfundingapp.database.RepositoryContract;
 
 import java.lang.ref.WeakReference;
@@ -9,13 +12,18 @@ public interface ProjectListContract {
     interface View {
         void injectPresenter(Presenter presenter);
 
-        void onDataUpdated(ProjectListViewModel viewModel);
+        void displayProjectListData(ProjectListViewModel viewModel);
 
-        void displayProjectListData(ProjectListState state);
+        void navigateToLoginScreen();
+
+        void onMenuItemWatchFavouriteClicked(MenuItem item);
     }
 
     interface Presenter {
-       void injectView(WeakReference<View> view);
+        boolean isUserLogged();
+
+
+        void injectView(WeakReference<View> view);
 
         void injectModel(Model model);
 
@@ -30,10 +38,16 @@ public interface ProjectListContract {
         void onPause();
 
         void onDestroy();
+
+        void onExitOptionItemSelected();
+
+        void onFavouriteListOptionItemSelected(boolean favourite);
     }
 
     interface Model {
         void fetchCrowdfundingProjects(RepositoryContract.GetProjectListCallback callback);
+
+        void getProjectsUserJoinList(int id, RepositoryContract.GetUserToProjectListCallback callback);
     }
 
 }

@@ -9,6 +9,7 @@ public class AppMediator {
 
     private static AppMediator INSTANCE;
 
+
     private LoginState loginState = new LoginState();
     private RegisterState registerState = new RegisterState();
     private ProjectListState projectListState = new ProjectListState();
@@ -31,6 +32,10 @@ public class AppMediator {
 
     public LoginState getLoginState() {
         return loginState;
+    }
+
+    public void setLoginState(LoginState loginState) {
+        this.loginState = loginState;
     }
 
     public RegisterState getRegisterState() {
