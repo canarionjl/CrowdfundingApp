@@ -11,7 +11,6 @@ public class AppMediator {
 
     private LoginState loginState = new LoginState();
     private RegisterState registerState = new RegisterState();
-
     private ProjectListState projectListState = new ProjectListState();
 
     private LoginToProjectListState loginToProjectListState;

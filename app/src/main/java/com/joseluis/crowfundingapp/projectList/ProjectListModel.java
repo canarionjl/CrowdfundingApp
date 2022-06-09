@@ -1,5 +1,7 @@
 package com.joseluis.crowfundingapp.projectList;
 
+import android.util.Log;
+
 import com.joseluis.crowfundingapp.database.RepositoryContract;
 
 public class ProjectListModel implements ProjectListContract.Model {
@@ -15,7 +17,7 @@ public class ProjectListModel implements ProjectListContract.Model {
     @Override
     public void fetchCrowdfundingProjects(RepositoryContract.GetProjectListCallback callback){
 
-         repository.loadCrowdfundingProjectsList(true, new RepositoryContract.FetchCrowdfundingDataCallback() {
+         repository.loadCrowdfundingProjectsList( new RepositoryContract.FetchCrowdfundingDataCallback() {
             @Override
             public void onCrowdfundingDataFetched(boolean error) {
                 if (!error) {

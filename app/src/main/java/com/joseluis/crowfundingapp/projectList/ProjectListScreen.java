@@ -25,7 +25,6 @@ public class ProjectListScreen {
         ProjectListContract.Model model = new ProjectListModel(CrowdfundingRepository.getInstance(context.get()));
         presenter.injectModel(model);
         presenter.injectView(new WeakReference<>(view));
-
         view.injectPresenter(presenter);
 
     }

@@ -2,9 +2,9 @@ package com.joseluis.crowfundingapp.projectList;
 
 import com.joseluis.crowfundingapp.data.ProjectItem;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class ProjectListViewModel {
 
-    ArrayList<ProjectItem> projectList;
+    List<ProjectItem> projectList;
 }

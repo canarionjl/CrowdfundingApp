@@ -2,6 +2,8 @@
 xmlns:tools="http://schemas.android.com/tools"
 package="com.joseluis.crowfundingapp">
 
+    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
+
 <application
     android:allowBackup="true"
     android:dataExtractionRules="@xml/data_extraction_rules"
@@ -33,6 +35,17 @@ package="com.joseluis.crowfundingapp">
         android:value=".login.LoginActivity"/>
         >
     </activity>
+
+    <activity
+        android:name=".projectList.ProjectListActivity"
+        android:parentActivityName=".login.LoginActivity"
+        android:exported="true">
+        <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value=".login.LoginActivity"/>
+        >
+    </activity>
+
 </application>
 
 </manifest>

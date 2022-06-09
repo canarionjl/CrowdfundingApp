@@ -10,6 +10,8 @@ public interface ProjectListContract {
         void injectPresenter(Presenter presenter);
 
         void onDataUpdated(ProjectListViewModel viewModel);
+
+        void displayProjectListData(ProjectListState state);
     }
 
     interface Presenter {

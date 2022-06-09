@@ -43,7 +43,7 @@ public interface RepositoryContract {
         void onUserUpdated();
     }
 
-    void loadCrowdfundingProjectsList(boolean clearFirst, CrowdfundingRepository.FetchCrowdfundingDataCallback callback);
+    void loadCrowdfundingProjectsList(CrowdfundingRepository.FetchCrowdfundingDataCallback callback);
 
     void getUser(int userId, CrowdfundingRepository.GetUserCallback callback);
 

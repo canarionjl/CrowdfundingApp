@@ -35,31 +35,23 @@ public class CrowdfundingRepository implements RepositoryContract {
 
     private CrowdfundingRepository(Context context) {
         this.context = context;
-
-        database = Room.databaseBuilder(
-                context, CrowdfundingDatabase.class, DB_FILE
-        ).build();
-
+        database = Room.databaseBuilder(context, CrowdfundingDatabase.class, DB_FILE).build();
     }
 
     public static RepositoryContract getInstance(Context context) {
         if (INSTANCE == null) {
             INSTANCE = new CrowdfundingRepository(context);
         }
-
         return INSTANCE;
     }
 
     @Override
-    public void loadCrowdfundingProjectsList(final boolean clearFirst, final FetchCrowdfundingDataCallback callback) {
+    public void loadCrowdfundingProjectsList(final FetchCrowdfundingDataCallback callback) {
 
         AsyncTask.execute(new Runnable() {
 
             @Override
             public void run() {
-                if (clearFirst) {
-                    database.clearAllTables();
-                }
 
                 boolean error = false;
                 if (getProjectDao().loadProjects().size() == 0) {
@@ -70,9 +62,7 @@ public class CrowdfundingRepository implements RepositoryContract {
                     callback.onCrowdfundingDataFetched(error);
                 }
             }
-
         });
-
     }
 
 
@@ -132,7 +122,6 @@ public class CrowdfundingRepository implements RepositoryContract {
                 }
             }
         });
-
     }
 
     @Override

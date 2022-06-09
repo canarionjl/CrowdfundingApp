@@ -1,5 +1,7 @@
 package com.joseluis.crowfundingapp.projectList;
 
+import android.util.Log;
+
 import com.joseluis.crowfundingapp.app.AppMediator;
 import com.joseluis.crowfundingapp.data.ProjectItem;
 import com.joseluis.crowfundingapp.database.RepositoryContract;
@@ -25,7 +27,7 @@ public class ProjectListPresenter implements ProjectListContract.Presenter {
     @Override
     public void onStart() {
 
-        }
+    }
 
     @Override
     public void onRestart() {
@@ -33,14 +35,9 @@ public class ProjectListPresenter implements ProjectListContract.Presenter {
 
     @Override
     public void onResume() {
-        model.fetchCrowdfundingProjects(new RepositoryContract.GetProjectListCallback() {
-            @Override
-            public void setProjectList(List<ProjectItem> projects) {
-                state.projectList=(ArrayList<ProjectItem>) projects;
-            }
-        });
-        view.get().onDataUpdated(state);
-        }
+        fetchCrowdfundingProjects();
+        //view.get().onDataUpdated(state);
+    }
 
     @Override
     public void onBackPressed() {
@@ -54,6 +51,19 @@ public class ProjectListPresenter implements ProjectListContract.Presenter {
     public void onDestroy() {
     }
 
+    public void fetchCrowdfundingProjects() {
+
+     model.fetchCrowdfundingProjects(new RepositoryContract.GetProjectListCallback(){
+
+        @Override
+        public void setProjectList (List < ProjectItem > projects) {
+        state.projectList = projects;
+        view.get().displayProjectListData(state);
+        }
+    });
+
+
+}
 
     @Override
     public void injectView(WeakReference<ProjectListContract.View> view) {

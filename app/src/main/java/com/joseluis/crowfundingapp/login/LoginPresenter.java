@@ -112,7 +112,7 @@ public class LoginPresenter implements LoginContract.Presenter {
         LoginToProjectListState newState = new LoginToProjectListState();
         newState.userItem=state.loggedUser;
         mediator.setLoginToProjectListState(newState);
-        view.get().navigateToRegisterScreen(); //debería ser ProjectList --> se puso register para prueba
+        view.get().navigateToProjectsListScreen(); //debería ser ProjectList --> se puso register para prueba
     }
 
     public boolean isUserCorrect(){
