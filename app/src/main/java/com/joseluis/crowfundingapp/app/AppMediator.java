@@ -20,6 +20,7 @@ public class AppMediator {
     private ProjectListToProjectContentState projectListToProjectContentState;
 
 
+
     private AppMediator() {}
 
 
@@ -76,4 +77,5 @@ public class AppMediator {
     public void setProjectListToProjectContentState(ProjectListToProjectContentState projectListToProjectContentState) {
         this.projectListToProjectContentState = projectListToProjectContentState;
     }
+
 }

@@ -6,11 +6,10 @@ import android.util.Log;
 
 import androidx.room.Room;
 
-import com.joseluis.crowfundingapp.data.ProjectItem;
-import com.joseluis.crowfundingapp.data.UserItem;
-
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.joseluis.crowfundingapp.data.ProjectItem;
+import com.joseluis.crowfundingapp.data.UserItem;
 import com.joseluis.crowfundingapp.data.UserProjectJoinTable;
 
 import org.json.JSONArray;
@@ -19,6 +18,7 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.List;
 
@@ -30,8 +30,8 @@ public class CrowdfundingRepository implements RepositoryContract {
     public static String TAG = CrowdfundingRepository.class.getSimpleName();
     private static CrowdfundingRepository INSTANCE;
 
-    private CrowdfundingDatabase database;
-    private Context context;
+    private final CrowdfundingDatabase database;
+    private final Context context;
 
 
     private CrowdfundingRepository(Context context) {
@@ -45,6 +45,7 @@ public class CrowdfundingRepository implements RepositoryContract {
         }
         return INSTANCE;
     }
+
 
     @Override
     public void loadCrowdfundingProjectsList(final FetchCrowdfundingDataCallback callback) {
@@ -67,6 +68,7 @@ public class CrowdfundingRepository implements RepositoryContract {
     }
 
 
+    //USERS
 
     @Override
     public void getUserList(final GetUserListCallback callback) {
@@ -83,34 +85,21 @@ public class CrowdfundingRepository implements RepositoryContract {
 
     }
 
+
     @Override
-    public void getUser(final int id, final GetUserCallback callback) {
+    public void insertUser(final UserItem user) {
 
         AsyncTask.execute(new Runnable() {
 
             @Override
             public void run() {
-                if (callback != null) {
-                    callback.setUser(getUserDao().loadUser(id));
-                }
+                getUserDao().insertUser(user);
             }
         });
     }
 
-    @Override
-    public void getProject(final int id, final GetProjectCallback callback) {
 
-        AsyncTask.execute(new Runnable() {
-
-            @Override
-            public void run() {
-                if (callback != null) {
-                    callback.setProject(getProjectDao().loadProject(id));
-                }
-            }
-        });
-
-    }
+    //PROJECTS
 
     @Override
     public void getProjectList(final GetProjectListCallback callback) {
@@ -125,82 +114,8 @@ public class CrowdfundingRepository implements RepositoryContract {
         });
     }
 
-    @Override
-    public void deleteUser(
-            final UserItem User, final DeleteUserCallback callback) {
 
-        AsyncTask.execute(new Runnable() {
-
-            @Override
-            public void run() {
-                if (callback != null) {
-                    getUserDao().deleteUser(User);
-                    callback.onUserDeleted();
-                }
-            }
-        });
-    }
-
-    public void insertUser( final UserItem user) {
-
-        AsyncTask.execute(new Runnable() {
-
-            @Override
-            public void run() {
-              getUserDao().insertUser(user);
-            }
-        });
-    }
-
-    @Override
-    public void updateUser(
-            final UserItem User, final UpdateUserCallback callback) {
-
-        AsyncTask.execute(new Runnable() {
-
-            @Override
-            public void run() {
-                if (callback != null) {
-                    getUserDao().updateUser(User);
-                    callback.onUserUpdated();
-                }
-            }
-        });
-    }
-
-
-    @Override
-    public void deleteProject(
-            final ProjectItem Project, final DeleteProjectCallback callback) {
-
-        AsyncTask.execute(new Runnable() {
-
-            @Override
-            public void run() {
-                if (callback != null) {
-                    getProjectDao().deleteProject(Project);
-                    callback.onProjectDeleted();
-                }
-            }
-        });
-    }
-
-
-    @Override
-    public void updateProject(
-            final ProjectItem Project, final UpdateProjectCallback callback) {
-
-        AsyncTask.execute(new Runnable() {
-
-            @Override
-            public void run() {
-                if (callback != null) {
-                    getProjectDao().updateProject(Project);
-                    callback.onProjectUpdated();
-                }
-            }
-        });
-    }
+    //USER TO PROJECT LIST (RELATIONSHIP)
 
     @Override
     public void getUserToProjectListWithId(int id, final GetUserToProjectListCallback callback) {
@@ -209,74 +124,113 @@ public class CrowdfundingRepository implements RepositoryContract {
             @Override
             public void run() {
                 if (callback != null) {
-                    if(id>(-1)) callback.setUserToProjectList(getUserProjectJoinTableDao().loadUserProjectsWithUserId(id));
+                    if (id > (-1))
+                        callback.setUserToProjectList(getUserProjectJoinTableDao().loadUserProjectsWithUserId(id));
                 }
             }
         });
     }
 
 
+    @Override
+    public void setUserToProjectListWithId(int userId, int projectId) {
+        AsyncTask.execute(new Runnable() {
 
-    private ProjectDao getProjectDao() {
-        return database.projectDao();
+            @Override
+            public void run() {
+                getUserProjectJoinTableDao().insertUserProjectJoin(new UserProjectJoinTable(userId, projectId));
+            }
+        });
+
     }
 
-    private UserDao getUserDao() {
-        return database.userDao();
+    @Override
+    public void deleteUserToProjectListWithId(UserProjectJoinTable userToProjectRelationship) {
+        AsyncTask.execute(new Runnable() {
+
+            @Override
+            public void run() {
+                getUserProjectJoinTableDao().deleteUserProjectJoin(userToProjectRelationship);
+            }
+        });
+
     }
 
+    @Override
+    public void getRelationshipBetweenUserAndProjectWithId (int userId,int projectId,RepositoryContract.GetRelationshipBetweenUserAndProjectWithId callback){
+        AsyncTask.execute(new Runnable() {
 
-    private UserProjectJoinTableDao getUserProjectJoinTableDao() {
-        return database.userProjectJoinTableDao();
+            @Override
+            public void run() {
+                callback.setUserProjectJoinTable(getUserProjectJoinTableDao().getRelationshipBetweenUserAndProjectWithId(userId,projectId));
+            }
+        });
+
+
     }
 
+        //DAOS
+
+        private ProjectDao getProjectDao () {
+            return database.projectDao();
+        }
+
+        private UserDao getUserDao () {
+            return database.userDao();
+        }
 
 
-    private boolean loadCrowdfundingFromJSON(String json) {
+        private UserProjectJoinTableDao getUserProjectJoinTableDao () {
+            return database.userProjectJoinTableDao();
+        }
 
 
-        GsonBuilder gsonBuilder = new GsonBuilder();
-        Gson gson = gsonBuilder.create();
+        //JSON MANAGING
 
-        try {
+        private boolean loadCrowdfundingFromJSON (String json){
 
-            JSONObject jsonObject = new JSONObject(json);
-            JSONArray jsonArray = jsonObject.getJSONArray(JSON_ROOT);
 
-            if (jsonArray.length() > 0) {
+            GsonBuilder gsonBuilder = new GsonBuilder();
+            Gson gson = gsonBuilder.create();
 
-                final List<ProjectItem> projects = Arrays.asList(
-                        gson.fromJson(jsonArray.toString(), ProjectItem[].class));
+            try {
 
-                for (ProjectItem projectItem : projects) {
-                    getProjectDao().insertProject(projectItem);
+                JSONObject jsonObject = new JSONObject(json);
+                JSONArray jsonArray = jsonObject.getJSONArray(JSON_ROOT);
+
+                if (jsonArray.length() > 0) {
+
+                    final ProjectItem[] projects = gson.fromJson(jsonArray.toString(), ProjectItem[].class);
+
+                    for (ProjectItem projectItem : projects) {
+                        getProjectDao().insertProject(projectItem);
+                    }
+                    return true;
                 }
-                return true;
+
+            } catch (JSONException error) {
+                Log.e(TAG, "error: " + error);
+            }
+            return false;
+        }
+
+        private String loadJSONFromAsset () {
+            String json = null;
+
+            try {
+                InputStream is = context.getAssets().open(JSON_FILE);
+                int size = is.available();
+                byte[] buffer = new byte[size];
+                is.read(buffer);
+                is.close();
+                json = new String(buffer, StandardCharsets.UTF_8);
+            } catch (IOException error) {
+                Log.e(TAG, "error: " + error);
             }
 
-        } catch (JSONException error) {
-            Log.e(TAG, "error: " + error);
-        }
-        return false;
-    }
-
-    private String loadJSONFromAsset() {
-        String json = null;
-
-        try {
-            InputStream is = context.getAssets().open(JSON_FILE);
-            int size = is.available();
-            byte[] buffer = new byte[size];
-            is.read(buffer);
-            is.close();
-            json = new String(buffer, "UTF-8");
-        } catch (IOException error) {
-            Log.e(TAG, "error: " + error);
+            return json;
         }
 
-        return json;
     }
-
-}
 
 

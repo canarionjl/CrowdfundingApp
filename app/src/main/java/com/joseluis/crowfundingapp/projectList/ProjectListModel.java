@@ -39,11 +39,9 @@ public class ProjectListModel implements ProjectListContract.Model {
         repository.getUserToProjectListWithId(id,new RepositoryContract.GetUserToProjectListCallback() {
             @Override
             public void setUserToProjectList(List<UserProjectJoinTable> favouriteProjects) {
-                callback.setUserToProjectList(favouriteProjects);
+                if(favouriteProjects!=null) callback.setUserToProjectList(favouriteProjects);
             }
         });
-
-
     }
 
 }

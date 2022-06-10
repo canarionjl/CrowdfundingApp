@@ -18,15 +18,8 @@ public interface ProjectDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertProject(ProjectItem Project);
 
-    @Update
-    void updateProject(ProjectItem Project);
-
-    @Delete
-    void deleteProject(ProjectItem Project);
-
     @Query("SELECT * FROM projects")
     List<ProjectItem> loadProjects();
 
-    @Query("SELECT * FROM projects WHERE id = :id LIMIT 1")
-    ProjectItem loadProject(int id);
 }
+

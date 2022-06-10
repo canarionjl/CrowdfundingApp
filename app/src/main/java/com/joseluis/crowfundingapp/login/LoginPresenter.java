@@ -4,6 +4,7 @@ package com.joseluis.crowfundingapp.login;
 import static androidx.core.content.res.TypedArrayUtils.getString;
 
 import android.util.Log;
+import android.widget.Toast;
 
 import com.joseluis.crowfundingapp.R;
 import com.joseluis.crowfundingapp.app.AppMediator;
@@ -32,6 +33,7 @@ public class LoginPresenter implements LoginContract.Presenter {
 
     @Override
     public void onStart() {
+
     }
 
     @Override

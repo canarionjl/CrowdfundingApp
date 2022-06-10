@@ -54,9 +54,14 @@ public class ProjectListPresenter implements ProjectListContract.Presenter {
         fetchCrowdfundingProjects();
 
         if (isUserLogged()) {
-            getCrowfundingFavouriteProjects();
+            new Runnable() {
+                @Override
+                public void run() {
+                    while (state.projectList == null) ;
+                    getCrowfundingFavouriteProjects();
+                }
+            }.run();
         }
-
         view.get().displayProjectListData(state);
     }
 
@@ -108,7 +113,7 @@ public class ProjectListPresenter implements ProjectListContract.Presenter {
         } else {
             favourite = false;
         }
-        newState.itemIsFavourite=false;
+        newState.itemIsFavourite=favourite;
 
         mediator.setProjectListToProjectContentState(newState);
         navigateToDetailProjectScreen();
@@ -147,8 +152,12 @@ public class ProjectListPresenter implements ProjectListContract.Presenter {
 
             @Override
             public void setUserToProjectList(List<UserProjectJoinTable> favouriteProjects) {
-                state.favouriteList=userProjectJoinTableIterator(favouriteProjects);
-                if(state.favouriteList==null) Log.e(TAG,"not null");
+                if(favouriteProjects!=null) {
+                    state.favouriteList=userProjectJoinTableIterator(favouriteProjects);
+                } else {
+
+                }
+
             }
         });
     }
@@ -170,6 +179,7 @@ public class ProjectListPresenter implements ProjectListContract.Presenter {
 
 
     public ProjectItem searchProjectById(int id) {
+        if(state.projectList==null) Log.e(TAG,"null en project list");
         for (ProjectItem item : state.projectList) {
             if (item.id == id) {
                 return item;

@@ -68,9 +68,9 @@ public class ProjectListActivity
     @Override
     protected void onDestroy() {
         super.onDestroy();
-
         presenter.onDestroy();
     }
+
 
 
 

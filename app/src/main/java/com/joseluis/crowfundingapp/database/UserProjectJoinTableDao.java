@@ -18,15 +18,12 @@ public interface UserProjectJoinTableDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertUserProjectJoin(UserProjectJoinTable userProjectJoinTable);
 
-    @Update
-    void updateUserProjectJoin(UserProjectJoinTable userProjectJoinTable);
-
     @Delete
     void deleteUserProjectJoin(UserProjectJoinTable userProjectJoinTable);
 
-    @Query("SELECT * FROM user_project_join")
-    List<UserProjectJoinTable> loadAllUserProjectJoinsTable();
-
     @Query("SELECT * FROM user_project_join WHERE userId = :id")
     List<UserProjectJoinTable> loadUserProjectsWithUserId(int id);
+
+    @Query("SELECT * FROM user_project_join WHERE userId = :userId AND projectId = :projectId LIMIT 1")
+    UserProjectJoinTable getRelationshipBetweenUserAndProjectWithId(int userId, int projectId);
 }

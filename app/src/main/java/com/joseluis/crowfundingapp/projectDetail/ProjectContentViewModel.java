@@ -8,7 +8,7 @@ public class ProjectContentViewModel {
     public String title;
     public String imageUrl;
     public String description;
-    public Date date;
+    public String date;
 
     public boolean isFavourite;
     public boolean invitedUser;

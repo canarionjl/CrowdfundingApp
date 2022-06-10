@@ -29,51 +29,53 @@ public class ProjectContentPresenter implements ProjectContentContract.Presenter
 
     @Override
     public void onStart() {
-
-
     }
 
    @Override
     public void onRestart() {
-
     }
 
     @Override
     public void onResume() {
        recoverDataFromProjectListState();
        view.get().onDataUpdated(state);
-
     }
 
     @Override
     public void onBackPressed() {
-
     }
 
     @Override
     public void onPause() {
-
     }
 
     @Override
     public void onDestroy() {
-
     }
 
-    //DATA MANIPULATION
+
+
+    //DATA SETTING/GETTING METHODS
+
+    public void addProjectToFavourite(int userId,int projectId){
+        model.insertUserToProjectRelationship(userId,projectId);
+    }
+
+    public void deleteProjectToFavourite (int userId, int projectId){
+        model.deleteUserToProjectRelationship(userId,projectId);
+    }
 
     public void recoverDataFromProjectListState(){
         ProjectListToProjectContentState newState = mediator.getProjectListToProjectContentState();
 
        if (newState != null){
-           Log.e(TAG,"NOT NULL");
 
             state.invitedUser=newState.invitedUser;
             state.projectItem=newState.itemClicked;
             state.userLogged=newState.userLogged;
 
             state.title = newState.itemClicked.title;
-            state.date = new Date(newState.itemClicked.date);
+            state.date = getStringDateFromMiliseconds(newState.itemClicked.date);
             state.description = newState.itemClicked.description;
             state.imageUrl = newState.itemClicked.picture;
 
@@ -81,6 +83,64 @@ public class ProjectContentPresenter implements ProjectContentContract.Presenter
         }
     }
 
+
+
+
+    //AUXILIAR DATA MANIPULATION
+
+    public String getStringDateFromMiliseconds(long miliseconds){
+        Date date = new Date(miliseconds);
+
+        int dayInt = date.getDate();
+        String day="";
+        if(dayInt<10) {
+            day = "0";
+        }
+        day = day+(dayInt);
+
+
+        int monthInt = date.getMonth();
+        String month="";
+        if(monthInt<10) month = "0";
+        month = month+(monthInt+1);
+
+        String year = Integer.toString(date.getYear()+1900);
+
+        int hourInt = date.getHours();
+        String hour="";
+        if(hourInt<10) hour = "0";
+        hour = hour+(hourInt);
+
+        int minutesInt = date.getMinutes();
+        String minutes="";
+        if(minutesInt<10) minutes = "0";
+        minutes = minutes+(minutesInt);
+
+        int secondsInt = date.getSeconds();
+        String seconds="";
+        if(secondsInt<10) seconds = "0";
+        seconds = seconds+(secondsInt);
+
+        String dateString = day+"/"+month+"/"+year+" "+hour+":"+minutes+":"+seconds;
+
+        return dateString;
+    }
+
+
+    //BUTTON CLICKED METHODS
+
+    @Override
+    public void onAddFavouriteButtonClicked(){
+        if(!state.invitedUser) {
+            if(!state.isFavourite) {
+                addProjectToFavourite(state.userLogged.id, state.projectItem.id);
+            }else{
+                deleteProjectToFavourite(state.userLogged.id,state.projectItem.id);
+            }
+            state.isFavourite=!state.isFavourite;
+            view.get().updateFavouriteButtonState(state);
+        }
+    }
 
 
 

@@ -8,8 +8,7 @@ import java.util.List;
 
 public interface RepositoryContract {
 
-
-    void getUserToProjectListWithId(int id, GetUserToProjectListCallback callback);
+    void getRelationshipBetweenUserAndProjectWithId(int userId, int projectId, GetRelationshipBetweenUserAndProjectWithId callback);
 
     interface FetchCrowdfundingDataCallback {
         void onCrowdfundingDataFetched(boolean error);
@@ -17,10 +16,6 @@ public interface RepositoryContract {
 
     interface GetUserListCallback {
         void setUserList(List<UserItem> Users);
-    }
-
-    interface GetUserCallback {
-        void setUser(UserItem User);
     }
 
     interface GetProjectListCallback {
@@ -31,45 +26,25 @@ public interface RepositoryContract {
         void setUserToProjectList(List<UserProjectJoinTable> projects);
     }
 
-
-    interface GetProjectCallback {
-        void setProject(ProjectItem Project);
+    interface GetRelationshipBetweenUserAndProjectWithId {
+        void setUserProjectJoinTable(UserProjectJoinTable relationship);
     }
 
-    interface DeleteProjectCallback {
-        void onProjectDeleted();
-    }
 
-    interface UpdateProjectCallback {
-        void onProjectUpdated();
-    }
-
-    interface DeleteUserCallback {
-        void onUserDeleted();
-    }
-
-    interface UpdateUserCallback {
-        void onUserUpdated();
-    }
 
     void loadCrowdfundingProjectsList(CrowdfundingRepository.FetchCrowdfundingDataCallback callback);
-
-    void getUser(int userId, CrowdfundingRepository.GetUserCallback callback);
 
     void insertUser (UserItem userItem);
 
     void getUserList(CrowdfundingRepository.GetUserListCallback callback);
 
-    void getProject(int projectId, CrowdfundingRepository.GetProjectCallback callback);
-
     void getProjectList(CrowdfundingRepository.GetProjectListCallback callback);
 
-    void deleteUser(UserItem User, CrowdfundingRepository.DeleteUserCallback callback);
+    void getUserToProjectListWithId(int id, GetUserToProjectListCallback callback);
 
-    void updateUser(UserItem User, CrowdfundingRepository.UpdateUserCallback callback);
+    void setUserToProjectListWithId(int userId, int projectId);
 
-    void deleteProject(ProjectItem Project, CrowdfundingRepository.DeleteProjectCallback callback);
+    void deleteUserToProjectListWithId(UserProjectJoinTable userToProjectRelationship);
 
-    void updateProject(ProjectItem Project, CrowdfundingRepository.UpdateProjectCallback callback);
 }
 

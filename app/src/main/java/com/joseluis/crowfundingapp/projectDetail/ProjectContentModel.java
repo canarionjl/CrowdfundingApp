@@ -1,5 +1,7 @@
 package com.joseluis.crowfundingapp.projectDetail;
 
+import android.util.Log;
+
 import com.joseluis.crowfundingapp.data.UserProjectJoinTable;
 import com.joseluis.crowfundingapp.database.CrowdfundingRepository;
 import com.joseluis.crowfundingapp.database.RepositoryContract;
@@ -25,7 +27,22 @@ public class ProjectContentModel implements ProjectContentContract.Model {
                 callback.setUserToProjectList(favouriteProjects);
             }
         });
+    }
 
+    @Override
+    public void insertUserToProjectRelationship(int userId, int projectId){
+        repository.setUserToProjectListWithId(userId,projectId);
+    }
+
+    @Override
+    public void deleteUserToProjectRelationship(int userId, int projectId){
+       repository.getRelationshipBetweenUserAndProjectWithId(userId, projectId, new RepositoryContract.GetRelationshipBetweenUserAndProjectWithId() {
+           @Override
+           public void setUserProjectJoinTable(UserProjectJoinTable relationship) {
+               Log.e(TAG,"relation not null");
+               if(relationship!=null) repository.deleteUserToProjectListWithId(relationship);
+           }
+       });
 
     }
 }

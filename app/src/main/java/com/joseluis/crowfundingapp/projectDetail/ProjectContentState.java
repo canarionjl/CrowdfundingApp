@@ -7,8 +7,8 @@ import com.joseluis.crowfundingapp.data.UserProjectJoinTable;
 import java.util.ArrayList;
 
 public class ProjectContentState extends ProjectContentViewModel {
+
     UserItem userLogged;
     ProjectItem projectItem;
-
 
 }

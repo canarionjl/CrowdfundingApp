@@ -1,6 +1,7 @@
 package com.joseluis.crowfundingapp.register;
 
 import android.util.Log;
+import android.widget.Toast;
 
 import com.joseluis.crowfundingapp.app.AppMediator;
 import com.joseluis.crowfundingapp.data.UserItem;
@@ -76,17 +77,21 @@ public class RegisterPresenter implements RegisterContract.Presenter {
     }
     @Override
     public void onRegisterButtonClicked() {
-        if (inputDataCheck()) {
 
+        boolean checkData = inputDataCheck();
+        state.information_text = REGISTER_INFORMATION;
+
+        if (checkData) {
             model.insertUser(state.usernameInput, state.passwordInput, state.emailInput);
-            updateUserList();
-
+            //updateUserList();
             state.passwordInput = "";
             state.emailInput = "";
             state.usernameInput = "";
+
+            navigateToLoginScreen();
+        } else {
+            view.get().onDataUpdated(state);
         }
-        state.information_text = REGISTER_INFORMATION;
-        view.get().onDataUpdated(state);
     }
 
     public boolean inputDataCheck(){
@@ -116,6 +121,11 @@ public class RegisterPresenter implements RegisterContract.Presenter {
         }
         REGISTER_INFORMATION="Se ha registrado correctamente";
         return true;
+    }
+
+    public void navigateToLoginScreen(){
+        Log.e(TAG,state.information_text);
+        view.get().navigateToLoginScreen(state);
     }
 
     @Override

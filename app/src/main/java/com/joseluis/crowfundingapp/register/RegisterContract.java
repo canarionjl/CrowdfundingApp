@@ -2,6 +2,7 @@ package com.joseluis.crowfundingapp.register;
 
 import com.joseluis.crowfundingapp.data.UserItem;
 import com.joseluis.crowfundingapp.database.RepositoryContract;
+import com.joseluis.crowfundingapp.login.LoginViewModel;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -9,11 +10,12 @@ import java.util.ArrayList;
 public interface RegisterContract {
 
     interface View {
-       void injectPresenter(Presenter presenter);
+
+        void navigateToLoginScreen(RegisterViewModel viewModel);
+
+        void injectPresenter(Presenter presenter);
 
         void onDataUpdated(RegisterViewModel viewModel);
-
-        void navigateToLoginScreen();
     }
 
     interface Presenter {

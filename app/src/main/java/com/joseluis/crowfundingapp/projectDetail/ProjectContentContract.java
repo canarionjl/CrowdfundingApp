@@ -11,11 +11,15 @@ public interface ProjectContentContract {
 
         void onDataUpdated(ProjectContentViewModel viewModel);
 
+        void updateFavouriteButtonState(ProjectContentViewModel viewModel);
+
         void navigateToNextScreen();
     }
 
     interface Presenter {
-       void injectView(WeakReference<View> view);
+        void onAddFavouriteButtonClicked();
+
+        void injectView(WeakReference<View> view);
 
         void injectModel(Model model);
 
@@ -35,6 +39,10 @@ public interface ProjectContentContract {
     interface Model {
 
         void getProjectsUserJoinList(int id, RepositoryContract.GetUserToProjectListCallback callback);
+
+        void insertUserToProjectRelationship(int userId, int projectId);
+
+        void deleteUserToProjectRelationship(int userId, int projectId);
     }
 
 }
