@@ -1,6 +1,14 @@
 package com.joseluis.crowfundingapp.projectDetail;
 
-public class ProjectContentState extends ProjectContentViewModel {
+import com.joseluis.crowfundingapp.data.ProjectItem;
+import com.joseluis.crowfundingapp.data.UserItem;
+import com.joseluis.crowfundingapp.data.UserProjectJoinTable;
 
-    // put the model state here
+import java.util.ArrayList;
+
+public class ProjectContentState extends ProjectContentViewModel {
+    UserItem userLogged;
+    ProjectItem projectItem;
+
+
 }

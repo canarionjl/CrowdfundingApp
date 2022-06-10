@@ -2,10 +2,14 @@ package com.joseluis.crowfundingapp.projectDetail;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
+import com.bumptech.glide.Glide;
 import com.joseluis.crowfundingapp.R;
 
 public class ProjectContentActivity
@@ -15,59 +19,59 @@ public class ProjectContentActivity
 
     private ProjectContentContract.Presenter presenter;
 
+    private Toolbar toolbar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.project_detail);
-        getSupportActionBar().setTitle(R.string.app_name);
 
+        setContentView(R.layout.activity_project_detail);
 
-        // do the setup
+        configureToolbar();
+
         ProjectContentScreen.configure(this);
 
-  /*      if (savedInstanceState == null) {
-            presenter.onStart();
-
+      if (savedInstanceState == null) {
+           presenter.onStart();
         } else {
-            presenter.onRestart();
-        }*/
+          presenter.onRestart();
+        }
+
     }
 
-    /*@Override
+    @Override
     protected void onResume() {
         super.onResume();
-
-        // load the data
         presenter.onResume();
     }
 
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-
         presenter.onBackPressed();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-
         presenter.onPause();
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-
         presenter.onDestroy();
     }
-*/
+
     @Override
     public void onDataUpdated(ProjectContentViewModel viewModel) {
-        //Log.e(TAG, "onDataUpdated()");
-
-        // deal with the data
-        //((TextView) findViewById(R.id.data)).setText(viewModel.data);
+        getSupportActionBar().setTitle(viewModel.title.toUpperCase());
+        ((TextView)findViewById(R.id.textViewDescriptionDetailProduct)).setText(viewModel.description);
+        ((TextView)findViewById(R.id.textViewDateAndHourDetailProduct)).setText("holaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+        ImageView imageView = findViewById(R.id.imageViewDetailContent);
+        Log.e(TAG,viewModel.imageUrl);
+        Glide.with(this).load(viewModel.imageUrl).into(imageView);
+        Glide.with(this).load(viewModel.imageUrl).placeholder(R.drawable.ic_baseline_error_24).into(imageView);
     }
 
 
@@ -76,6 +80,20 @@ public class ProjectContentActivity
         Intent intent = new Intent(this, ProjectContentActivity.class);
         startActivity(intent);
     }
+
+
+    //VIEW CONFIGURATION
+
+    public void configureToolbar(){
+        toolbar = findViewById(R.id.toolbarProjectDetailActivity);
+        setSupportActionBar(toolbar);
+    }
+
+
+
+
+
+    //MVP METHODS
 
     @Override
     public void injectPresenter(ProjectContentContract.Presenter presenter) {

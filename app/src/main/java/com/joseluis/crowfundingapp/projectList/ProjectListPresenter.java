@@ -1,7 +1,10 @@
 package com.joseluis.crowfundingapp.projectList;
 
+import android.util.Log;
+
 import com.joseluis.crowfundingapp.app.AppMediator;
 import com.joseluis.crowfundingapp.app.LoginToProjectListState;
+import com.joseluis.crowfundingapp.app.ProjectListToProjectContentState;
 import com.joseluis.crowfundingapp.data.ProjectItem;
 import com.joseluis.crowfundingapp.data.UserProjectJoinTable;
 import com.joseluis.crowfundingapp.database.RepositoryContract;
@@ -26,6 +29,9 @@ public class ProjectListPresenter implements ProjectListContract.Presenter {
         this.mediator = mediator;
         state = mediator.getProjectListState();
     }
+
+
+
 
     //ACTIVITY LIFECYCLE METHODS
 
@@ -70,6 +76,9 @@ public class ProjectListPresenter implements ProjectListContract.Presenter {
 
 
 
+
+
+
     //BUTTON CLICKED METHODS
 
     @Override
@@ -85,10 +94,36 @@ public class ProjectListPresenter implements ProjectListContract.Presenter {
         view.get().displayProjectListData(state);
     }
 
+    @Override
+    public void selectProjectListData(ProjectItem item){
+        ProjectListToProjectContentState newState=new ProjectListToProjectContentState();
+
+        newState.invitedUser=state.invitedUser;
+        newState.itemClicked=item;
+        newState.userLogged= state.userLogged;
+
+        boolean favourite;
+        if(!state.invitedUser) {
+            favourite = isProjectFavourite(item);
+        } else {
+            favourite = false;
+        }
+        newState.itemIsFavourite=false;
+
+        mediator.setProjectListToProjectContentState(newState);
+        navigateToDetailProjectScreen();
+    }
+
+    private void navigateToDetailProjectScreen() {
+        view.get().navigateToDetailProjectScreen();
+    }
 
 
 
-    // STATE (DATA) RELATED METHODS
+
+
+
+    // DATA GETTING METHODS
 
     @Override
     public boolean isUserLogged() {
@@ -113,9 +148,13 @@ public class ProjectListPresenter implements ProjectListContract.Presenter {
             @Override
             public void setUserToProjectList(List<UserProjectJoinTable> favouriteProjects) {
                 state.favouriteList=userProjectJoinTableIterator(favouriteProjects);
+                if(state.favouriteList==null) Log.e(TAG,"not null");
             }
         });
     }
+
+
+
 
 
 
@@ -138,6 +177,18 @@ public class ProjectListPresenter implements ProjectListContract.Presenter {
         }
         return null;
     }
+
+    public boolean isProjectFavourite(ProjectItem item){
+            for (ProjectItem project : state.favouriteList) {
+                if (project.id == item.id) return true;
+
+        }
+        return false;
+    }
+
+
+
+
 
 
     //MVP METHODS

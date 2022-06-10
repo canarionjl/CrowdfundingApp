@@ -17,11 +17,12 @@ public interface ProjectListContract {
         void navigateToLoginScreen();
 
         void onMenuItemWatchFavouriteClicked(MenuItem item);
+
+        void navigateToDetailProjectScreen();
     }
 
     interface Presenter {
         boolean isUserLogged();
-
 
         void injectView(WeakReference<View> view);
 
@@ -42,6 +43,8 @@ public interface ProjectListContract {
         void onExitOptionItemSelected();
 
         void onFavouriteListOptionItemSelected(boolean favourite);
+
+        void selectProjectListData(ProjectItem item);
     }
 
     interface Model {

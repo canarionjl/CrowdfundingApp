@@ -46,6 +46,16 @@ package="com.joseluis.crowfundingapp">
         >
     </activity>
 
+    <activity
+        android:name=".projectDetail.ProjectContentActivity"
+        android:parentActivityName=".projectList.ProjectListActivity"
+        android:exported="true">
+        <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value=".projectList.ProjectListActivity"/>
+        >
+    </activity>
+
 </application>
 
 </manifest>

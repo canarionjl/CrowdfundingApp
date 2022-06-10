@@ -2,41 +2,49 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_detail_project"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/primaryLightColor"
-    android:id="@+id/activity_detail_project"
     tools:context=".projectDetail.ProjectContentActivity">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbarRecyclerActivity"
+        android:id="@+id/toolbarProjectDetailActivity"
         android:layout_width="416dp"
         android:layout_height="58dp"
         android:background="@color/secondaryDarkColor"
+        android:backgroundTint="@color/secondaryDarkColor"
+        android:foregroundTint="@color/secondaryTextColor"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        />
+        app:titleTextColor="@color/secondaryTextColor" />
 
     <ImageView
         android:id="@+id/imageViewDetailContent"
-        android:layout_width="410dp"
-        android:layout_height="268dp"
+        android:layout_width="0dp"
+        android:layout_height="270dp"
+        android:scaleType="fitXY"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbarRecyclerActivity"
+        app:layout_constraintTop_toBottomOf="@+id/toolbarProjectDetailActivity"
         tools:srcCompat="@tools:sample/avatars" />
 
     <ScrollView
         android:id="@+id/scrollView2"
         android:layout_width="411dp"
         android:layout_height="200dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/button2"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageViewDetailContent"
+        app:layout_constraintVertical_bias="0.203"
         tools:ignore="SpeakableTextPresentCheck">
 
         <LinearLayout
@@ -49,9 +57,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:fontFamily="sans-serif-medium"
+                android:fontFamily="sans-serif-condensed"
+                android:foregroundGravity="center"
+                android:gravity="center"
                 android:text="TextView"
-                android:textSize="18sp"
+                android:textSize="20sp"
                 tools:text="DESCRIPCIÓN: Combinación de estilos como Rock and Roll y Jazz para crear un disco único que disfrutarás del principio hasta el final ¡ No pierdas la oportunidad de apoyar el proyecto y recibir una copia única!" />
 
             <TextView
@@ -59,9 +69,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:fontFamily="sans-serif-medium"
+                android:fontFamily="sans-serif-condensed"
+                android:gravity="center"
                 android:text="TextView"
-                android:textSize="18sp"
+                android:textSize="22sp"
+                android:textStyle="bold|italic"
                 tools:text="Fecha de publicación: 19/07/2022, 18:30" />
 
         </LinearLayout>
@@ -70,17 +82,21 @@
     <Button
         android:id="@+id/button2"
         android:layout_width="167dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="28dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="200dp"
+        android:layout_marginBottom="10dp"
         android:backgroundTint="@color/secondaryDarkColor"
         android:text="@string/NotFavouriteButton"
         android:textColor="@color/secondaryTextColor"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/scrollView2" />
+        app:layout_constraintTop_toBottomOf="@+id/imageViewDetailContent"
+        app:layout_constraintVertical_bias="1.0" />
 
     <LinearLayout
-        android:layout_width="418dp"
+        android:id="@+id/linearLayout"
+        android:layout_width="0dp"
         android:layout_height="69dp"
         android:background="@color/primaryColor"
         android:backgroundTint="@color/primaryColor"
@@ -111,8 +127,8 @@
 
         <ImageButton
             android:id="@+id/imageButtonLocation"
-            android:layout_width="131dp"
-            android:layout_height="67dp"
+            android:layout_width="122dp"
+            android:layout_height="79dp"
             android:layout_weight="1"
             android:backgroundTint="@color/primaryColor"
             android:contextClickable="true"
@@ -120,6 +136,12 @@
             tools:ignore="SpeakableTextPresentCheck" />
 
     </LinearLayout>
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="scrollView2" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

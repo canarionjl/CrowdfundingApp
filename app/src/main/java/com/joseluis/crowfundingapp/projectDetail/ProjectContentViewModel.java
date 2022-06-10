@@ -1,7 +1,16 @@
 package com.joseluis.crowfundingapp.projectDetail;
 
+import java.util.Date;
+
 public class ProjectContentViewModel {
 
-    // put the view state here
-    public String data;
+
+    public String title;
+    public String imageUrl;
+    public String description;
+    public Date date;
+
+    public boolean isFavourite;
+    public boolean invitedUser;
+
 }

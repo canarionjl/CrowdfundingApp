@@ -1,8 +1,17 @@
 package com.joseluis.crowfundingapp.projectDetail;
 
+import android.util.Log;
+
 import com.joseluis.crowfundingapp.app.AppMediator;
+import com.joseluis.crowfundingapp.app.LoginToProjectListState;
+import com.joseluis.crowfundingapp.app.ProjectListToProjectContentState;
+import com.joseluis.crowfundingapp.data.UserProjectJoinTable;
+import com.joseluis.crowfundingapp.database.RepositoryContract;
 
 import java.lang.ref.WeakReference;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 public class ProjectContentPresenter implements ProjectContentContract.Presenter {
 
@@ -15,92 +24,67 @@ public class ProjectContentPresenter implements ProjectContentContract.Presenter
 
     public ProjectContentPresenter(AppMediator mediator) {
         this.mediator = mediator;
-        //state = mediator.getProjectContentState();
+        state = mediator.getProjectContentState();
     }
 
-/*    @Override
+    @Override
     public void onStart() {
-        // Log.e(TAG, "onStart()");
 
-        // initialize the state
-        state = new ProjectContentState();
 
-        // call the model and update the state
-        state.data = model.getStoredData();
+    }
 
-        // use passed state if is necessary
-        PreviousToProjectContentState savedState = getStateFromPreviousScreen();
-        if (savedState != null) {
-
-            // update the model if is necessary
-            model.onDataFromPreviousScreen(savedState.data);
-
-            // update the state if is necessary
-            state.data = savedState.data;
-        }
-    }*/
-
-/*    @Override
+   @Override
     public void onRestart() {
-        // Log.e(TAG, "onRestart()");
 
-        // update the model if is necessary
-        model.onRestartScreen(state.data);
-    }*/
+    }
 
-    /*@Override
+    @Override
     public void onResume() {
-        // Log.e(TAG, "onResume()");
-
-        // use passed state if is necessary
-        NextToProjectContentState savedState = getStateFromNextScreen();
-        if (savedState != null) {
-
-            // update the model if is necessary
-            model.onDataFromNextScreen(savedState.data);
-
-            // update the state if is necessary
-            state.data = savedState.data;
-        }
-
-        // call the model and update the state
-        //state.data = model.getStoredData();
-
-        // update the view
-        view.get().onDataUpdated(state);
+       recoverDataFromProjectListState();
+       view.get().onDataUpdated(state);
 
     }
 
     @Override
     public void onBackPressed() {
-        // Log.e(TAG, "onBackPressed()");
+
     }
 
     @Override
     public void onPause() {
-        // Log.e(TAG, "onPause()");
+
     }
 
     @Override
     public void onDestroy() {
-        // Log.e(TAG, "onDestroy()");
+
     }
 
-    private NextToProjectContentState getStateFromNextScreen() {
-        return mediator.getNextProjectContentScreenState();
+    //DATA MANIPULATION
+
+    public void recoverDataFromProjectListState(){
+        ProjectListToProjectContentState newState = mediator.getProjectListToProjectContentState();
+
+       if (newState != null){
+           Log.e(TAG,"NOT NULL");
+
+            state.invitedUser=newState.invitedUser;
+            state.projectItem=newState.itemClicked;
+            state.userLogged=newState.userLogged;
+
+            state.title = newState.itemClicked.title;
+            state.date = new Date(newState.itemClicked.date);
+            state.description = newState.itemClicked.description;
+            state.imageUrl = newState.itemClicked.picture;
+
+            state.isFavourite=newState.itemIsFavourite;
+        }
     }
 
-    private void passStateToNextScreen(ProjectContentToNextState state) {
-        mediator.setNextProjectContentScreenState(state);
-    }
 
-    private void passStateToPreviousScreen(ProjectContentToPreviousState state) {
-        mediator.setPreviousProjectContentScreenState(state);
-    }
 
-    private PreviousToProjectContentState getStateFromPreviousScreen() {
-        return mediator.getPreviousProjectContentScreenState();
-    }
+
+    //MVP METHODS
 
     @Override
     public void injectView(WeakReference<ProjectContentContract.View> view) {
@@ -111,5 +95,4 @@ public class ProjectContentPresenter implements ProjectContentContract.Presenter
     public void injectModel(ProjectContentContract.Model model) {
         this.model = model;
     }
-*/
 }

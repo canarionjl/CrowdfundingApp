@@ -60,7 +60,7 @@ public class ProjectListAdapter extends RecyclerView.Adapter<ProjectListAdapter.
         holder.title.setText(itemList.get(position).title.toUpperCase());
         holder.category.setText(itemList.get(position).category);
         holder.author.setText(itemList.get(position).author);
-        //Glide.with(context).load(itemList.get(position).picture).into(holder.image);
+
 
         int resId = obtenerResIdToImage(itemList.get(position).category.toLowerCase());
         holder.image.setImageResource(resId);

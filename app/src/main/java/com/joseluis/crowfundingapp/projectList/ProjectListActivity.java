@@ -1,24 +1,18 @@
 package com.joseluis.crowfundingapp.projectList;
 
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.PorterDuff;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.joseluis.crowfundingapp.R;
 import com.joseluis.crowfundingapp.data.ProjectItem;
+import com.joseluis.crowfundingapp.projectDetail.ProjectContentActivity;
 
 public class ProjectListActivity
         extends AppCompatActivity implements ProjectListContract.View {
@@ -29,37 +23,29 @@ public class ProjectListActivity
 
     private ProjectListAdapter adapter;
 
-    Toolbar toolbar;
-    Menu menu;
+    private Toolbar toolbar;
+    private Menu menu;
+
+
+    //LIFECYCLE ACTIVITY METHODS
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_project_list);
 
-        toolbar = findViewById(R.id.toolbarRecyclerActivity);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle(R.string.title_toolbar_ProjectList_Activity);
+        configureToolbar();
 
-        adapter = new ProjectListAdapter(this,new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ProjectItem item = (ProjectItem) view.getTag();
-                //presenter.selectProjectListData(item);
-            }
-        });
-
-        RecyclerView recyclerView = findViewById(R.id.project_list);
-        recyclerView.setAdapter(adapter);
+        configureRecyclerView();
 
         ProjectListScreen.configure(this);
 
         if (savedInstanceState == null) {
             presenter.onStart();
-
         } else {
             presenter.onRestart();
         }
+
     }
 
     @Override
@@ -71,13 +57,12 @@ public class ProjectListActivity
     @Override
     protected void onPause() {
         super.onPause();
-
         presenter.onPause();
     }
 
     @Override
     public void onBackPressed() {
-        //super.onBackPressed();
+        //super.onBackPressed(); --> no se puede volver atrás por back, se debe hacer por icono de logout en toolbar menu
     }
 
     @Override
@@ -88,6 +73,9 @@ public class ProjectListActivity
     }
 
 
+
+
+    //SCREEN DATA MANIPULATION
 
     public void onDataUpdated(ProjectListViewModel viewModel) {
         if(viewModel.favouriteListSelected){
@@ -111,16 +99,61 @@ public class ProjectListActivity
         });
     }
 
+
+
+
+    //SCREEN CONFIGURATION
+
+    public void configureRecyclerView() {
+        adapter = new ProjectListAdapter(this, new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ProjectItem item = (ProjectItem) view.getTag();
+                presenter.selectProjectListData(item);
+            }
+        });
+
+        RecyclerView recyclerView = findViewById(R.id.project_list);
+        recyclerView.setAdapter(adapter);
+    }
+
+    public void configureToolbar(){
+        toolbar = findViewById(R.id.toolbarRecyclerActivity);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle(R.string.title_toolbar_ProjectList_Activity);
+    }
+
+
+
+
+    //NAVIGATION BETWEEN SCREENS
+
     @Override
     public void navigateToLoginScreen() {
         finish();
     }
 
+    @Override
+    public void navigateToDetailProjectScreen(){
+        Intent intent = new Intent(this, ProjectContentActivity.class);
+        startActivity(intent);
+    }
+
+
+
+
+
+    //MVP METHODS
 
     @Override
     public void injectPresenter(ProjectListContract.Presenter presenter) {
         this.presenter = presenter;
     }
+
+
+
+
+    //MENU CONFIGURATION
 
     @Override
     public boolean onCreateOptionsMenu (Menu menu) {

@@ -1,6 +1,7 @@
 package com.joseluis.crowfundingapp.app;
 
 import com.joseluis.crowfundingapp.login.LoginState;
+import com.joseluis.crowfundingapp.projectDetail.ProjectContentState;
 import com.joseluis.crowfundingapp.projectList.ProjectListState;
 import com.joseluis.crowfundingapp.register.RegisterState;
 
@@ -13,11 +14,15 @@ public class AppMediator {
     private LoginState loginState = new LoginState();
     private RegisterState registerState = new RegisterState();
     private ProjectListState projectListState = new ProjectListState();
+    private ProjectContentState projectContentState = new ProjectContentState();
 
     private LoginToProjectListState loginToProjectListState;
+    private ProjectListToProjectContentState projectListToProjectContentState;
 
 
     private AppMediator() {}
+
+
 
     public static AppMediator getInstance() {
         if (INSTANCE == null) {
@@ -30,30 +35,27 @@ public class AppMediator {
         INSTANCE = null;
     }
 
+
+
+
     public LoginState getLoginState() {
         return loginState;
-    }
-
-    public void setLoginState(LoginState loginState) {
-        this.loginState = loginState;
     }
 
     public RegisterState getRegisterState() {
         return registerState;
     }
 
-    public void setRegisterState(RegisterState registerState) {
-        this.registerState = registerState;
-    }
-
-
     public ProjectListState getProjectListState() {
         return projectListState;
     }
 
-    public void setProjectListState(ProjectListState projectListState) {
-        this.projectListState = projectListState;
+    public ProjectContentState getProjectContentState() {
+        return projectContentState;
     }
+
+
+
 
     public LoginToProjectListState getLoginToProjectListState() {
         LoginToProjectListState state = loginToProjectListState;
@@ -64,25 +66,14 @@ public class AppMediator {
     public void setLoginToProjectListState(LoginToProjectListState loginToProjectListState) {
         this.loginToProjectListState = loginToProjectListState;
     }
-/*
-    public CrowdfundingState getCrowdfundingState() {
-        return mCrowdfundingState;
+
+    public ProjectListToProjectContentState getProjectListToProjectContentState() {
+        ProjectListToProjectContentState state = projectListToProjectContentState;
+        projectListToProjectContentState = null;
+        return state;
     }
 
-
-    public NextToCrowdfundingState getNextCrowdfundingScreenState() {
-        return null;
+    public void setProjectListToProjectContentState(ProjectListToProjectContentState projectListToProjectContentState) {
+        this.projectListToProjectContentState = projectListToProjectContentState;
     }
-
-    public void setNextCrowdfundingScreenState(CrowdfundingToNextState state) {
-
-    }
-
-    public void setPreviousCrowdfundingScreenState(CrowdfundingToPreviousState state) {
-
-    }
-
-    public PreviousToCrowdfundingState getPreviousCrowdfundingScreenState() {
-        return null;
-    }*/
 }
