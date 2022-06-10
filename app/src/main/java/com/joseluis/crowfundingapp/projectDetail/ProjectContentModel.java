@@ -20,16 +20,6 @@ public class ProjectContentModel implements ProjectContentContract.Model {
     }
 
     @Override
-    public void getProjectsUserJoinList(int id, RepositoryContract.GetUserToProjectListCallback callback){
-        repository.getUserToProjectListWithId(id,new RepositoryContract.GetUserToProjectListCallback() {
-            @Override
-            public void setUserToProjectList(List<UserProjectJoinTable> favouriteProjects) {
-                callback.setUserToProjectList(favouriteProjects);
-            }
-        });
-    }
-
-    @Override
     public void insertUserToProjectRelationship(int userId, int projectId){
         repository.setUserToProjectListWithId(userId,projectId);
     }

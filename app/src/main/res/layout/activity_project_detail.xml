@@ -116,13 +116,13 @@
             tools:ignore="SpeakableTextPresentCheck" />
 
         <ImageButton
-            android:id="@+id/imageButtonAlarm"
+            android:id="@+id/imageButtonCall"
             android:layout_width="132dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:backgroundTint="@color/primaryColor"
             android:contextClickable="true"
-            app:srcCompat="@drawable/alarma_icon"
+            app:srcCompat="@drawable/telephone_icon"
             tools:ignore="SpeakableTextPresentCheck" />
 
         <ImageButton

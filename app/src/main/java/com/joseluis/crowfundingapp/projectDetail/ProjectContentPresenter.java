@@ -1,6 +1,7 @@
 package com.joseluis.crowfundingapp.projectDetail;
 
 import android.util.Log;
+import android.widget.Toast;
 
 import com.joseluis.crowfundingapp.app.AppMediator;
 import com.joseluis.crowfundingapp.app.LoginToProjectListState;
@@ -127,6 +128,7 @@ public class ProjectContentPresenter implements ProjectContentContract.Presenter
     }
 
 
+
     //BUTTON CLICKED METHODS
 
     @Override
@@ -141,6 +143,15 @@ public class ProjectContentPresenter implements ProjectContentContract.Presenter
             view.get().updateFavouriteButtonState(state);
         }
     }
+
+    public void configureProjectContactCall(){
+        view.get().makeCall(state.projectItem.phoneContact);
+    }
+
+    public void onMapButtonClicked(){
+        view.get().showMap(state.projectItem.latitude,state.projectItem.longitude,state.title);
+    }
+
 
 
 

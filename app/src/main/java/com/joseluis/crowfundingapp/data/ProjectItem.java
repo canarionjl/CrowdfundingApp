@@ -18,6 +18,10 @@ public class ProjectItem {
     public String category;
     public String description;
     public String picture;
+    public String phoneContact;
     public long date;
+
+    public String latitude;
+    public String longitude;
 
 }

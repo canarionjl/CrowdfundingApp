@@ -7,13 +7,18 @@ import java.lang.ref.WeakReference;
 public interface ProjectContentContract {
 
     interface View {
+
+        void makeCall(String phone);
+
+        void onMapButtonClicked();
+
         void injectPresenter(Presenter presenter);
 
         void onDataUpdated(ProjectContentViewModel viewModel);
 
         void updateFavouriteButtonState(ProjectContentViewModel viewModel);
 
-        void navigateToNextScreen();
+        void showMap(String latitude, String longitude, String projectName);
     }
 
     interface Presenter {
@@ -34,11 +39,15 @@ public interface ProjectContentContract {
         void onPause();
 
         void onDestroy();
+
+        void configureProjectContactCall();
+
+        void onMapButtonClicked();
     }
 
     interface Model {
 
-        void getProjectsUserJoinList(int id, RepositoryContract.GetUserToProjectListCallback callback);
+       // void getProjectsUserJoinList(int id, RepositoryContract.GetUserToProjectListCallback callback);
 
         void insertUserToProjectRelationship(int userId, int projectId);
 

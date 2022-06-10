@@ -7,7 +7,10 @@
       "category": "Música",
       "description": "Combinación de estilos como Rock&Roll y Jazz para crear un disco único que disfrutarás del principio hasta el final ¡No pierdas la oportunidad de apoyar el proyecto y recibir una copia única!",
       "picture": "https://as01.epimg.net/betech/imagenes/2018/03/23/portada/1521796881_183853_1521797135_sumario_normal.jpg",
-      "date": 1658251800000
+      "phoneContact": "+34646675085",
+      "date": 1658251800000,
+      "latitude": "28.1191",
+      "longitude": "-15.5247"
     },
 
     {
@@ -17,7 +20,10 @@
       "category": "Deportes",
       "description": "Partido realizado entre la UD Las Palmas y el UD Moya con el objetivo de recaudar fondos para la Villa de Moya. Se realizará en el estadio García Hernández. Los patrocinadores del evento son tres: Barbería Saul Climent, Spar Supermercados Moya y Bar Cafetería El Palomo. Después del partido los jugadores de la UD Las Palmas realizarán una sesión de firma y fotos con quellos aficionados que estén interesados",
       "picture": "https://pbs.twimg.com/profile_images/1434803393613160452/JaMjHLRJ_400x400.jpg",
-      "date": 1660489200000
+      "phoneContact": "+34654124758",
+      "date": 1660489200000,
+      "latitude": "28.1012",
+      "longitude": "-15.589"
     },
 
     {
@@ -27,7 +33,10 @@
       "category": "Tecnología",
       "description": "El objetivo de la Funcación Cardano al iniciar este proyecto no es otro que el de obtención de recursos económicos para seguir investigando y desarrollando esta red descentralizada de cara a su próximo hard fork",
       "picture": "https://assets.iproup.com/cdn-cgi/image/w=640,f=webp/https://assets.iproup.com/assets/jpg/2022/02/25934.jpg",
-      "date": 1699430400000
+      "phoneContact": "+34687656789",
+      "date": 1699430400000,
+      "latitude": "51.5072",
+      "longitude": "-0.1275"
     }
   ]
  }

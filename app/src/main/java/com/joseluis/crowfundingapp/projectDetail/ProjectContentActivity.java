@@ -1,12 +1,17 @@
 package com.joseluis.crowfundingapp.projectDetail;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.AlarmClock;
+import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -75,7 +80,6 @@ public class ProjectContentActivity
         presenter.onAddFavouriteButtonClicked();
     }
 
-
     //DATA MANIPULATION
 
     @Override
@@ -105,12 +109,6 @@ public class ProjectContentActivity
     }
 
 
-    @Override
-    public void navigateToNextScreen() {
-        Intent intent = new Intent(this, ProjectContentActivity.class);
-        startActivity(intent);
-    }
-
 
     //VIEW CONFIGURATION
 
@@ -127,9 +125,51 @@ public class ProjectContentActivity
                 onAddFavouriteButtonClicked();
             }
         });
+
+        ((ImageButton)findViewById(R.id.imageButtonCall)).setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View view) {
+                configureProjectContactCall();
+            }
+        });
+
+        ((ImageButton)findViewById(R.id.imageButtonLocation)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onMapButtonClicked();
+            }
+        });
     }
 
 
+
+    @Override
+    public void makeCall(String phone){
+        if(phone==null){
+            Toast.makeText(this,R.string.CallingError,Toast.LENGTH_SHORT).show();
+            return;
+        }else {
+            Intent intentCall = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + phone));
+            startActivity(intentCall);
+        }
+    }
+
+    @Override
+    public void showMap (String latitude, String longitude, String projectName){
+        Intent intent = new Intent (Intent.ACTION_VIEW);
+        intent.setData(Uri.parse("geo:<"+latitude+">,<"+longitude+">?q=<"+latitude+">,<"+longitude+">(Proyecto: "+projectName+")"));
+        if(intent.resolveActivity(getPackageManager())!=null) startActivity(intent);
+    }
+
+    public void configureProjectContactCall(){
+        presenter.configureProjectContactCall();
+    }
+
+    @Override
+    public void onMapButtonClicked(){
+        presenter.onMapButtonClicked();
+    }
 
 
 
