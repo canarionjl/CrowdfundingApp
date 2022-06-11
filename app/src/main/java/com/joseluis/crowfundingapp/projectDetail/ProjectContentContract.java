@@ -10,8 +10,6 @@ public interface ProjectContentContract {
 
         void makeCall(String phone);
 
-        void onMapButtonClicked();
-
         void injectPresenter(Presenter presenter);
 
         void onDataUpdated(ProjectContentViewModel viewModel);
@@ -19,6 +17,8 @@ public interface ProjectContentContract {
         void updateFavouriteButtonState(ProjectContentViewModel viewModel);
 
         void showMap(String latitude, String longitude, String projectName);
+
+        void addEventToCalendar(String title, long date);
     }
 
     interface Presenter {
@@ -43,6 +43,8 @@ public interface ProjectContentContract {
         void configureProjectContactCall();
 
         void onMapButtonClicked();
+
+        void onAddCalendarButtonClicked();
     }
 
     interface Model {

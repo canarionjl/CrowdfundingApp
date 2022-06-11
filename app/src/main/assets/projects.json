@@ -18,7 +18,7 @@
       "title": "Partido de Fútbol Benéfico",
       "author": "Asociación de Moya",
       "category": "Deportes",
-      "description": "Partido realizado entre la UD Las Palmas y el UD Moya con el objetivo de recaudar fondos para la Villa de Moya. Se realizará en el estadio García Hernández. Los patrocinadores del evento son tres: Barbería Saul Climent, Spar Supermercados Moya y Bar Cafetería El Palomo. Después del partido los jugadores de la UD Las Palmas realizarán una sesión de firma y fotos con quellos aficionados que estén interesados",
+      "description": "Partido realizado entre la UD Las Palmas y el UD Moya con el objetivo de recaudar fondos para la Villa de Moya. Se realizará en el estadio García Hernández. Los patrocinadores del evento son tres: Barbería Saul Climent, Spar Supermercados Moya y Bar Cafetería El Palomo. Después del partido los jugadores de la UD Las Palmas realizarán una sesión de firma y fotos con aquellos aficionados que estén interesados",
       "picture": "https://pbs.twimg.com/profile_images/1434803393613160452/JaMjHLRJ_400x400.jpg",
       "phoneContact": "+34654124758",
       "date": 1660489200000,
@@ -37,7 +37,35 @@
       "date": 1699430400000,
       "latitude": "51.5072",
       "longitude": "-0.1275"
-    }
+    },
+
+    {
+      "id": 4,
+      "title": "PARKING-FEST CINEMA MADRID",
+      "author": "Asociación de cultura y ocio de Madrid (Independiente)",
+      "category": "Entretenimiento",
+      "description": "Idea que surge de querer volver a la maravillosa y olvidada idea de los Parking-Cinema. En momentos en los que el distanciamiento social es necesario para algunas personas debido a ser personas de riesgo frente al Covid-19, queremos que estas también puedan disfrutar con toda seguridad y tranquilidad del cine. Además, ¡¡estaremos recuperando esta traidicional idea que tantas ilusiones brindó en el pasado!!",
+      "picture": "https://media.gq-magazine.co.uk/photos/5efdaca4563a6bbe91ce0ab3/master/pass/20200702-cinema-04.jpg",
+      "phoneContact": "+34645874125",
+      "date": 1669852800000,
+      "latitude": "40.4165 ",
+      "longitude": "-3.70256"
+    },
+
+    {
+      "id": 5,
+      "title": "Arduino&Raspberry IoT Start-Up",
+      "author": "Universidad de Las Palmas de Gran Canaria",
+      "category": "Tecnología",
+      "description": "Start-Up fundada por algunos alumnos de Ingeniería en Telecomunicaciones e Ingeniería Informática con el objetivo de desarollar diferentes proyectos IoT (como pueden ser brazos robóticos) utilizando Arduino (en extensión con placas como la ESP32) y/o Raspberry Pi. Estos proyectos estarán especialmente orientados hacia personas con movilidad reducida. La fecha estimada de nuestro primer proyecto es:",
+      "picture": "https://www.aranacorp.com/wp-content/uploads/raspberry-pi-arduino-i2c-communication_bb.png",
+      "phoneContact": "+34645874125",
+      "date": 1674086400000,
+      "latitude": "28.0716736",
+      "longitude": "--15.4528452"
+    },
+
+
   ]
  }
 

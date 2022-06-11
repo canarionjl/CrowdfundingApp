@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.AlarmClock;
+import android.provider.CalendarContract;
 import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.View;
@@ -140,6 +141,14 @@ public class ProjectContentActivity
                 onMapButtonClicked();
             }
         });
+
+        ((ImageView)findViewById(R.id.imageButtonCalendar)).setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View view) {
+                onAddCalendarButtonClicked();
+            }
+        });
     }
 
 
@@ -151,25 +160,54 @@ public class ProjectContentActivity
             return;
         }else {
             Intent intentCall = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + phone));
-            startActivity(intentCall);
+            if(intentCall.resolveActivity(getPackageManager())!=null) startActivity(intentCall);
         }
     }
 
     @Override
     public void showMap (String latitude, String longitude, String projectName){
-        Intent intent = new Intent (Intent.ACTION_VIEW);
-        intent.setData(Uri.parse("geo:<"+latitude+">,<"+longitude+">?q=<"+latitude+">,<"+longitude+">(Proyecto: "+projectName+")"));
-        if(intent.resolveActivity(getPackageManager())!=null) startActivity(intent);
+
+        if(latitude==null||longitude==null||projectName==null){
+            Toast.makeText(this,R.string.MapError,Toast.LENGTH_SHORT).show();
+
+        }else {
+
+            Intent intentMap = new Intent(Intent.ACTION_VIEW);
+            intentMap.setData(Uri.parse("geo:<" + latitude + ">,<" + longitude + ">?q=<" + latitude + ">,<" + longitude + ">(Proyecto: " + projectName + ")"));
+            if (intentMap.resolveActivity(getPackageManager()) != null) startActivity(intentMap);
+        }
+    }
+
+    @Override
+    public void addEventToCalendar (String title, long date){
+        if(title==null || date< (long) 0) {
+            Toast.makeText(this,R.string.CalendarError,Toast.LENGTH_SHORT).show();
+        } else {
+
+            Intent intentCalendar = new Intent(Intent.ACTION_INSERT).setData(CalendarContract.Events.CONTENT_URI);
+
+            intentCalendar.putExtra(CalendarContract.Events.TITLE, title);
+            intentCalendar.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, date);
+
+            if (intentCalendar.resolveActivity(getPackageManager()) != null)
+                startActivity(intentCalendar);
+        }
     }
 
     public void configureProjectContactCall(){
         presenter.configureProjectContactCall();
     }
 
-    @Override
+
     public void onMapButtonClicked(){
         presenter.onMapButtonClicked();
     }
+
+    public void onAddCalendarButtonClicked(){
+        presenter.onAddCalendarButtonClicked();
+    }
+
+
 
 
 

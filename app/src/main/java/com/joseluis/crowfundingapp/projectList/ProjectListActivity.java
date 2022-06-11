@@ -160,7 +160,6 @@ public class ProjectListActivity
         getMenuInflater().inflate(R.menu.toolbar_menu,menu);
         this.menu=menu;
         configureWatchFavouriteMenuItem();
-
         return super.onCreateOptionsMenu(menu);
     }
 

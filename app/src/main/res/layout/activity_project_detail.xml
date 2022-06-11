@@ -6,11 +6,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/primaryLightColor"
+    android:paddingHorizontal="0dp"
     tools:context=".projectDetail.ProjectContentActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbarProjectDetailActivity"
-        android:layout_width="416dp"
+        android:layout_width="0dp"
         android:layout_height="58dp"
         android:background="@color/secondaryDarkColor"
         android:backgroundTint="@color/secondaryDarkColor"
@@ -60,6 +61,7 @@
                 android:fontFamily="sans-serif-condensed"
                 android:foregroundGravity="center"
                 android:gravity="center"
+                android:paddingHorizontal="10dp"
                 android:text="TextView"
                 android:textSize="20sp"
                 tools:text="DESCRIPCIÓN: Combinación de estilos como Rock and Roll y Jazz para crear un disco único que disfrutarás del principio hasta el final ¡ No pierdas la oportunidad de apoyar el proyecto y recibir una copia única!" />
@@ -71,6 +73,7 @@
                 android:layout_marginTop="10dp"
                 android:fontFamily="sans-serif-condensed"
                 android:gravity="center"
+                android:paddingHorizontal="5dp"
                 android:text="TextView"
                 android:textSize="22sp"
                 android:textStyle="bold|italic"
@@ -106,13 +109,13 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <ImageButton
-            android:id="@+id/imageButtonFavourite"
+            android:id="@+id/imageButtonCalendar"
             android:layout_width="134dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:backgroundTint="@color/primaryColor"
             android:contextClickable="true"
-            app:srcCompat="@drawable/money_payment_icon"
+            app:srcCompat="@drawable/calendar_icon"
             tools:ignore="SpeakableTextPresentCheck" />
 
         <ImageButton

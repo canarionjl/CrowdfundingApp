@@ -152,6 +152,10 @@ public class ProjectContentPresenter implements ProjectContentContract.Presenter
         view.get().showMap(state.projectItem.latitude,state.projectItem.longitude,state.title);
     }
 
+    public void onAddCalendarButtonClicked(){
+        view.get().addEventToCalendar(state.title, state.projectItem.date);
+    }
+
 
 
 
