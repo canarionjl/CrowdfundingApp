@@ -92,8 +92,8 @@
 
     <TextView
         android:id="@+id/textViewLoginErrorMessage"
-        android:layout_width="223dp"
-        android:layout_height="23dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:textColor="#E40E0E"
         app:layout_constraintEnd_toEndOf="@+id/editTextLoginPassword"

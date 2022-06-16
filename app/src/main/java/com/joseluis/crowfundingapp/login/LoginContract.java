@@ -49,6 +49,7 @@ public interface LoginContract {
         
         void getUsersList(RepositoryContract.GetUserListCallback callback);
 
+        void deleteAllTables();
     }
 
 }

@@ -112,11 +112,11 @@ public class RegisterPresenter implements RegisterContract.Presenter {
             }
         }
         if (!state.emailInput.contains("@")||!state.emailInput.contains(".")||state.emailInput.length()<5) {
-            REGISTER_INFORMATION="Formato de correo electrónico incorrecto";
+            REGISTER_INFORMATION="El email debe contener '@' y '.' (punto)";
             return false;
         }
         if(state.passwordInput.length()<8) {
-            REGISTER_INFORMATION="Formato de contraseña incorrecto";
+            REGISTER_INFORMATION="La contraseña debe tener 8 caracteres o más";
             return false;
         }
         REGISTER_INFORMATION="Se ha registrado correctamente";

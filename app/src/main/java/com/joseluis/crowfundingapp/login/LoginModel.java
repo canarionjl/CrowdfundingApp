@@ -29,4 +29,9 @@ public class LoginModel implements LoginContract.Model {
             }
         });
     }
+
+    @Override
+    public void deleteAllTables(){
+        repository.deleteTables();
+    }
 }

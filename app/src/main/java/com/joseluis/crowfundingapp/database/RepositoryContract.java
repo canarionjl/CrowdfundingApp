@@ -31,6 +31,7 @@ public interface RepositoryContract {
     }
 
 
+    void deleteTables();
 
     void loadCrowdfundingProjectsList(CrowdfundingRepository.FetchCrowdfundingDataCallback callback);
 

@@ -12,6 +12,7 @@
     <string name="Text_CardView_Button_SeeMore">VER MÁS</string>
     <string name="NotFavouriteButton">AÑADIR A FAVORITOS</string>
     <string name="FavouriteButton">ELIMINAR DE FAVORITOS</string>
+    <string name="InvitedFavouriteButton">INICIE SESIÓN PARA AÑADIR A FAVORITOS</string>
     <string name="CallingError">No es posible realizar el contacto</string>
     <string name="CalendarError">No es posible guardar el evento</string>
     <string name="MapError">No es posible mostrar el evento</string>

@@ -46,9 +46,23 @@ public class CrowdfundingRepository implements RepositoryContract {
         return INSTANCE;
     }
 
+    @Override
+    public void deleteTables() {
+
+        AsyncTask.execute(new Runnable() {
+
+            @Override
+            public void run() {
+                database.clearAllTables();
+            }
+        });
+
+    }
+
 
     @Override
     public void loadCrowdfundingProjectsList(final FetchCrowdfundingDataCallback callback) {
+
 
         AsyncTask.execute(new Runnable() {
 

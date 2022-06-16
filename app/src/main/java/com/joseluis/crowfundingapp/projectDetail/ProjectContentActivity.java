@@ -1,6 +1,7 @@
 package com.joseluis.crowfundingapp.projectDetail;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.AlarmClock;
@@ -38,6 +39,8 @@ public class ProjectContentActivity
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_project_detail);
+
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         configureToolbar();
         configureButtons();
@@ -106,6 +109,7 @@ public class ProjectContentActivity
             }
         } else {
             favouriteButton.setClickable(false);
+            favouriteButton.setText(R.string.InvitedFavouriteButton);
         }
     }
 
