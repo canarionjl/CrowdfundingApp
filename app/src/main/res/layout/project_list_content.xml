@@ -74,7 +74,7 @@
             tools:text="Autor del proyecto" />
 
         <ImageView
-            android:id="@+id/imageView2"
+            android:id="@+id/imageViewGoToContentIcon"
             android:layout_width="40dp"
             android:layout_height="30dp"
             android:layout_marginBottom="15dp"

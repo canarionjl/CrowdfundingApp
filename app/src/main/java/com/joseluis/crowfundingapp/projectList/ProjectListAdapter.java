@@ -101,5 +101,7 @@ public class ProjectListAdapter extends RecyclerView.Adapter<ProjectListAdapter.
     }
 
     public static String TAG = ProjectListAdapter.class.getSimpleName();
+
+
 }
 
