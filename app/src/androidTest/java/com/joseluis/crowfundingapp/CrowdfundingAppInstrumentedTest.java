@@ -21,8 +21,10 @@ import static androidx.test.espresso.matcher.ViewMatchers.withText;
 
 import static org.hamcrest.Matchers.allOf;
 
+import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.notNullValue;
 import static org.hamcrest.core.IsNot.not;
+import static org.hamcrest.core.IsNull.nullValue;
 import static org.junit.Assert.fail;
 
 import android.app.Activity;
@@ -377,8 +379,8 @@ public class CrowdfundingAppInstrumentedTest {
         //Se comprueban los diferentes elementos mostrados
         onView(withId(R.id.textViewDescriptionDetailProduct)).check(matches(withText("Combinación de estilos como Rock&Roll y Jazz para crear un disco único que disfrutarás del principio hasta el final ¡No pierdas la oportunidad de apoyar el proyecto y recibir una copia única!")));
         onView(withId(R.id.textViewDateAndHourDetailProduct)).check(matches(withText("19/07/2022 17:30:00")));
-        onView(withId(R.id.buttonAddFavouriteItem)).check(matches(isDisplayed()));
         onView(withId(R.id.buttonAddFavouriteItem)).check(matches(not(isClickable())));
+        onView(allOf(withId(R.id.buttonAddFavouriteItem),withText(R.string.InvitedFavouriteButton))).check(matches(isDisplayed()));
     }
 
     @Test
@@ -400,7 +402,7 @@ public class CrowdfundingAppInstrumentedTest {
         //Se comprueban los diferentes elementos mostrados
         onView(withId(R.id.textViewDescriptionDetailProduct)).check(matches(withText("Combinación de estilos como Rock&Roll y Jazz para crear un disco único que disfrutarás del principio hasta el final ¡No pierdas la oportunidad de apoyar el proyecto y recibir una copia única!")));
         onView(withId(R.id.textViewDateAndHourDetailProduct)).check(matches(withText("19/07/2022 17:30:00")));
-        onView(withId(R.id.buttonAddFavouriteItem)).check(matches(isDisplayed()));
+        onView(allOf(withId(R.id.buttonAddFavouriteItem),withText(R.string.NotFavouriteButton))).check(matches(isDisplayed()));
         onView(withId(R.id.buttonAddFavouriteItem)).check(matches(isClickable()));
     }
 
@@ -419,7 +421,7 @@ public class CrowdfundingAppInstrumentedTest {
         //Se muestra la descripción del proyecto
         onView(withId(R.id.textViewDescriptionDetailProduct)).check(matches(withText("Partido realizado entre la UD Las Palmas y el UD Moya con el objetivo de recaudar fondos para la Villa de Moya. Se realizará en el estadio García Hernández. Los patrocinadores del evento son tres: Barbería Saul Climent, Spar Supermercados Moya y Bar Cafetería El Palomo. Después del partido los jugadores de la UD Las Palmas realizarán una sesión de firmas y fotos con aquellos aficionados que estén interesados")));
         onView(withId(R.id.textViewDateAndHourDetailProduct)).check(matches(withText("14/08/2022 15:00:00")));
-        onView(withId(R.id.buttonAddFavouriteItem)).check(matches(isDisplayed()));
+        onView(allOf(withId(R.id.buttonAddFavouriteItem),withText(R.string.InvitedFavouriteButton))).check(matches(isDisplayed()));
         onView(withId(R.id.buttonAddFavouriteItem)).check(matches(not(isClickable())));
     }
 
@@ -442,9 +444,261 @@ public class CrowdfundingAppInstrumentedTest {
         //Se muestra la descripción del proyecto
         onView(withId(R.id.textViewDescriptionDetailProduct)).check(matches(withText("Partido realizado entre la UD Las Palmas y el UD Moya con el objetivo de recaudar fondos para la Villa de Moya. Se realizará en el estadio García Hernández. Los patrocinadores del evento son tres: Barbería Saul Climent, Spar Supermercados Moya y Bar Cafetería El Palomo. Después del partido los jugadores de la UD Las Palmas realizarán una sesión de firmas y fotos con aquellos aficionados que estén interesados")));
         onView(withId(R.id.textViewDateAndHourDetailProduct)).check(matches(withText("14/08/2022 15:00:00")));
-        onView(withId(R.id.buttonAddFavouriteItem)).check(matches(isDisplayed()));
+        onView(allOf(withId(R.id.buttonAddFavouriteItem),withText(R.string.NotFavouriteButton))).check(matches(isDisplayed()));
         onView(withId(R.id.buttonAddFavouriteItem)).check(matches(isClickable()));
     }
+
+    @Test
+    public void clickOnThirdElementGuestUser(){
+        //Se pulsa botón ACCEDER COMO INVITADO
+        onView(withId(R.id.textViewGuestAccess)).perform(click());
+        //Se debe mostrar el activity con la lista de proyectos (maestro)
+        onView(withId(R.id.activity_project_list)).check(matches(isDisplayed()));
+        //Click en el primer elemento
+        onView(withId(R.id.project_list)).perform(actionOnItemAtPosition(2,click()));
+        //Estamos en pantalla del contenido del projecto (detalle)
+        onView(withId(R.id.activity_detail_project)).check(matches(isDisplayed()));
+        //Se muestra el título en el Toolbar
+        onView(withId(R.id.toolbarProjectDetailActivity)).check(matches(hasDescendant(withText("CARDANO BLOCKCHAIN"))));
+        //Se muestra la descripción del proyecto
+        onView(withId(R.id.textViewDescriptionDetailProduct)).check(matches(withText("El objetivo de la Fundación Cardano al iniciar este proyecto no es otro que el de la obtención de recursos económicos para seguir investigando y desarrollando esta red descentralizada de cara a su próximo hard fork")));
+        onView(withId(R.id.textViewDateAndHourDetailProduct)).check(matches(withText("08/11/2023 08:00:00")));
+        onView(allOf(withId(R.id.buttonAddFavouriteItem),withText(R.string.InvitedFavouriteButton))).check(matches(isDisplayed()));
+        onView(withId(R.id.buttonAddFavouriteItem)).check(matches(not(isClickable())));
+    }
+
+    @Test
+    public void clickOnThirdElementLoggedUser(){
+        //Registro e inicio de sesión
+        onView(withId(R.id.textLoginRegister)).perform(click());
+        registerProcedure("usuarioTest","password","prueba@gmail.com");
+        onView(withId(R.id.buttonRegister)).perform(click());
+        sesionInitProcedure("usuarioTest","password");
+        onView(withId(R.id.buttonLogin)).perform(click());
+        //Se debe mostrar el activity con la lista de proyectos (maestro)
+        onView(withId(R.id.activity_project_list)).check(matches(isDisplayed()));
+        //Click en el primer elemento
+        onView(withId(R.id.project_list)).perform(actionOnItemAtPosition(2,click()));
+        //Estamos en pantalla del contenido del projecto (detalle)
+        onView(withId(R.id.activity_detail_project)).check(matches(isDisplayed()));
+        //Se muestra el título en el Toolbar
+        onView(withId(R.id.toolbarProjectDetailActivity)).check(matches(hasDescendant(withText("CARDANO BLOCKCHAIN"))));
+        //Se muestra la descripción del proyecto
+        onView(withId(R.id.textViewDescriptionDetailProduct)).check(matches(withText("El objetivo de la Fundación Cardano al iniciar este proyecto no es otro que el de la obtención de recursos económicos para seguir investigando y desarrollando esta red descentralizada de cara a su próximo hard fork")));
+        onView(withId(R.id.textViewDateAndHourDetailProduct)).check(matches(withText("08/11/2023 08:00:00")));
+        onView(allOf(withId(R.id.buttonAddFavouriteItem),withText(R.string.NotFavouriteButton))).check(matches(isDisplayed()));
+        onView(withId(R.id.buttonAddFavouriteItem)).check(matches(isClickable()));
+    }
+
+    @Test
+    public void clickOnFourthElementGuestUser(){
+        //Se pulsa botón ACCEDER COMO INVITADO
+        onView(withId(R.id.textViewGuestAccess)).perform(click());
+        //Se debe mostrar el activity con la lista de proyectos (maestro)
+        onView(withId(R.id.activity_project_list)).check(matches(isDisplayed()));
+        //Click en el primer elemento
+        onView(withId(R.id.project_list)).perform(actionOnItemAtPosition(3,click()));
+        //Estamos en pantalla del contenido del projecto (detalle)
+        onView(withId(R.id.activity_detail_project)).check(matches(isDisplayed()));
+        //Se muestra el título en el Toolbar
+        onView(withId(R.id.toolbarProjectDetailActivity)).check(matches(hasDescendant(withText("PARKING-FEST CINEMA MADRID"))));
+        //Se muestra la descripción del proyecto
+        onView(withId(R.id.textViewDescriptionDetailProduct)).check(matches(withText("Idea que surge de querer volver a la maravillosa y olvidada idea de los Parking-Cinema. En momentos en los que el distanciamiento social es necesario para algunas personas debido a ser de riesgo frente al Covid-19, queremos que estas también puedan disfrutar con toda seguridad y tranquilidad del cine. Además, ¡¡estaremos recuperando esta traidicional idea que tantas ilusiones brindó en el pasado!!")));
+        onView(withId(R.id.textViewDateAndHourDetailProduct)).check(matches(withText("01/12/2022 00:00:00")));
+        onView(allOf(withId(R.id.buttonAddFavouriteItem),withText(R.string.InvitedFavouriteButton))).check(matches(isDisplayed()));
+        onView(withId(R.id.buttonAddFavouriteItem)).check(matches(not(isClickable())));
+    }
+
+    @Test
+    public void clickOnFourthElementLoggedUser(){
+        //Registro e inicio de sesión
+        onView(withId(R.id.textLoginRegister)).perform(click());
+        registerProcedure("usuarioTest","password","prueba@gmail.com");
+        onView(withId(R.id.buttonRegister)).perform(click());
+        sesionInitProcedure("usuarioTest","password");
+        onView(withId(R.id.buttonLogin)).perform(click());
+        //Se debe mostrar el activity con la lista de proyectos (maestro)
+        onView(withId(R.id.activity_project_list)).check(matches(isDisplayed()));
+        //Click en el primer elemento
+        onView(withId(R.id.project_list)).perform(actionOnItemAtPosition(3,click()));
+        //Estamos en pantalla del contenido del projecto (detalle)
+        onView(withId(R.id.activity_detail_project)).check(matches(isDisplayed()));
+        //Se muestra el título en el Toolbar
+        onView(withId(R.id.toolbarProjectDetailActivity)).check(matches(hasDescendant(withText("PARKING-FEST CINEMA MADRID"))));
+        //Se muestra la descripción del proyecto
+        onView(withId(R.id.textViewDescriptionDetailProduct)).check(matches(withText("Idea que surge de querer volver a la maravillosa y olvidada idea de los Parking-Cinema. En momentos en los que el distanciamiento social es necesario para algunas personas debido a ser de riesgo frente al Covid-19, queremos que estas también puedan disfrutar con toda seguridad y tranquilidad del cine. Además, ¡¡estaremos recuperando esta traidicional idea que tantas ilusiones brindó en el pasado!!")));
+        onView(withId(R.id.textViewDateAndHourDetailProduct)).check(matches(withText("01/12/2022 00:00:00")));
+        onView(allOf(withId(R.id.buttonAddFavouriteItem),withText(R.string.NotFavouriteButton))).check(matches(isDisplayed()));
+        onView(withId(R.id.buttonAddFavouriteItem)).check(matches(isClickable()));
+    }
+
+    @Test
+    public void clickOnFifthElementGuestUser(){
+        //Se pulsa botón ACCEDER COMO INVITADO
+        onView(withId(R.id.textViewGuestAccess)).perform(click());
+        //Se debe mostrar el activity con la lista de proyectos (maestro)
+        onView(withId(R.id.activity_project_list)).check(matches(isDisplayed()));
+        //Click en el primer elemento
+        onView(withId(R.id.project_list)).perform(actionOnItemAtPosition(4,click()));
+        //Estamos en pantalla del contenido del projecto (detalle)
+        onView(withId(R.id.activity_detail_project)).check(matches(isDisplayed()));
+        //Se muestra el título en el Toolbar
+        onView(withId(R.id.toolbarProjectDetailActivity)).check(matches(hasDescendant(withText("ARDUINO&RASPBERRY IOT START-UP"))));
+        //Se muestra la descripción del proyecto
+        onView(withId(R.id.textViewDescriptionDetailProduct)).check(matches(withText("Start-Up fundada por algunos alumnos de Ingeniería en Telecomunicaciones e Ingeniería Informática con el objetivo de desarollar diferentes proyectos IoT (como puede ser brazos robóticos) utilizando Arduino (en extensión con placas como la ESP32) y/o Raspberry Pi. Estos proyectos estarán especialmente orientados hacia personas con movilidad reducida. La fecha estimada de nuestro primer proyecto es:")));
+        onView(withId(R.id.textViewDateAndHourDetailProduct)).check(matches(withText("19/01/2023 00:00:00")));
+        onView(allOf(withId(R.id.buttonAddFavouriteItem),withText(R.string.InvitedFavouriteButton))).check(matches(isDisplayed()));
+        onView(withId(R.id.buttonAddFavouriteItem)).check(matches(not(isClickable())));
+    }
+
+    @Test
+    public void clickOnFifthElementLoggedUser(){
+        //Registro e inicio de sesión
+        onView(withId(R.id.textLoginRegister)).perform(click());
+        registerProcedure("usuarioTest","password","prueba@gmail.com");
+        onView(withId(R.id.buttonRegister)).perform(click());
+        sesionInitProcedure("usuarioTest","password");
+        onView(withId(R.id.buttonLogin)).perform(click());
+        //Se debe mostrar el activity con la lista de proyectos (maestro)
+        onView(withId(R.id.activity_project_list)).check(matches(isDisplayed()));
+        //Click en el primer elemento
+        onView(withId(R.id.project_list)).perform(actionOnItemAtPosition(4,click()));
+        //Estamos en pantalla del contenido del projecto (detalle)
+        onView(withId(R.id.activity_detail_project)).check(matches(isDisplayed()));
+        //Se muestra el título en el Toolbar
+        onView(withId(R.id.toolbarProjectDetailActivity)).check(matches(hasDescendant(withText("ARDUINO&RASPBERRY IOT START-UP"))));
+        //Se muestra la descripción del proyecto
+        onView(withId(R.id.textViewDescriptionDetailProduct)).check(matches(withText("Start-Up fundada por algunos alumnos de Ingeniería en Telecomunicaciones e Ingeniería Informática con el objetivo de desarollar diferentes proyectos IoT (como puede ser brazos robóticos) utilizando Arduino (en extensión con placas como la ESP32) y/o Raspberry Pi. Estos proyectos estarán especialmente orientados hacia personas con movilidad reducida. La fecha estimada de nuestro primer proyecto es:")));
+        onView(withId(R.id.textViewDateAndHourDetailProduct)).check(matches(withText("19/01/2023 00:00:00")));
+        onView(allOf(withId(R.id.buttonAddFavouriteItem),withText(R.string.NotFavouriteButton))).check(matches(isDisplayed()));
+        onView(withId(R.id.buttonAddFavouriteItem)).check(matches(isClickable()));
+    }
+
+    @Test
+    public void AddingAndDeletingFavouriteItem(){
+        //Registro e inicio de sesión
+        onView(withId(R.id.textLoginRegister)).perform(click());
+        registerProcedure("usuarioTest","password","prueba@gmail.com");
+        onView(withId(R.id.buttonRegister)).perform(click());
+        sesionInitProcedure("usuarioTest","password");
+        onView(withId(R.id.buttonLogin)).perform(click());
+        //Se muestra lista de favoritos vacía
+        openActionBarOverflowOrOptionsMenu(ApplicationProvider.getApplicationContext());
+        onView(withText("Ver favoritos")).perform(click());
+        try {
+            onView(new RecyclerViewMatcher(R.id.project_list)
+                    .atPositionOnView(0, R.id.textViewTitleDetailProject))
+                    .check(matches(isDisplayed()));
+            fail("Se está mostrando un elemento de la lista que no corresponde");
+        } catch (Exception e){
+            assertThat(e,notNullValue());
+        }
+        //Se vuelve a la lista con todos los proyectos
+        openActionBarOverflowOrOptionsMenu(ApplicationProvider.getApplicationContext());
+        onView(withText("Ver favoritos")).perform(click());
+
+        //Click en el primer elemento
+        onView(withId(R.id.project_list)).perform(actionOnItemAtPosition(0,click()));
+        onView(allOf(withId(R.id.buttonAddFavouriteItem),withText(R.string.NotFavouriteButton))).check(matches(isDisplayed()));
+        onView(withId(R.id.buttonAddFavouriteItem)).perform(click());
+        onView(allOf(withId(R.id.buttonAddFavouriteItem),withText(R.string.FavouriteButton))).check(matches(isDisplayed()));
+        pressBack();
+
+        //Se muestra lista de favoritos con un elemento
+        openActionBarOverflowOrOptionsMenu(ApplicationProvider.getApplicationContext());
+        onView(withText("Ver favoritos")).perform(click());
+
+        onView(new RecyclerViewMatcher(R.id.project_list)
+                .atPositionOnView(0, R.id.textViewTitleDetailProject))
+                .check(matches(withText("CD DE ALBERTO RODRÍGUEZ")));
+        try {
+            onView(new RecyclerViewMatcher(R.id.project_list)
+                    .atPositionOnView(1, R.id.textViewTitleDetailProject))
+                    .check(matches(isDisplayed()));
+            fail("Se está mostrando un elemento de la lista que no corresponde");
+        } catch (Exception e){
+            assertThat(e,notNullValue());
+        }
+        //Se accede al detalle del item marcado como favorito desde la lista de favoritos
+        onView(withId(R.id.project_list)).perform(actionOnItemAtPosition(0,click()));
+        onView(allOf(withId(R.id.buttonAddFavouriteItem),withText(R.string.FavouriteButton))).check(matches(isDisplayed()));
+        onView(withId(R.id.buttonAddFavouriteItem)).perform(click());
+        onView(allOf(withId(R.id.buttonAddFavouriteItem),withText(R.string.NotFavouriteButton))).check(matches(isDisplayed()));
+        pressBack();
+
+        //Se comprueba que no hay ningun elemento en la lista de favoritos (y por tanto, la lista de favoritos sigue seleccionada)
+        try {
+            onView(new RecyclerViewMatcher(R.id.project_list)
+                    .atPositionOnView(0, R.id.textViewTitleDetailProject))
+                    .check(matches(isDisplayed()));
+            fail("Se está mostrando un elemento de la lista que no corresponde");
+        } catch (Exception e){
+            assertThat(e,notNullValue());
+        }
+    }
+
+    @Test
+    public void checkingProjectsRemainStoredInBBDD(){
+        //Registro e inicio de sesión
+        onView(withId(R.id.textLoginRegister)).perform(click());
+        registerProcedure("usuarioTest","password","prueba@gmail.com");
+        onView(withId(R.id.buttonRegister)).perform(click());
+        sesionInitProcedure("usuarioTest","password");
+        onView(withId(R.id.buttonLogin)).perform(click());
+
+        //Click en el primer elemento y lo añadimos a favorito
+        onView(withId(R.id.project_list)).perform(actionOnItemAtPosition(0,click()));
+        onView(allOf(withId(R.id.buttonAddFavouriteItem),withText(R.string.NotFavouriteButton))).check(matches(isDisplayed()));
+        onView(withId(R.id.buttonAddFavouriteItem)).perform(click());
+        onView(allOf(withId(R.id.buttonAddFavouriteItem),withText(R.string.FavouriteButton))).check(matches(isDisplayed()));
+        pressBack();
+
+        //Se muestra lista de favoritos con un elemento
+        openActionBarOverflowOrOptionsMenu(ApplicationProvider.getApplicationContext());
+        onView(withText("Ver favoritos")).perform(click());
+
+        onView(new RecyclerViewMatcher(R.id.project_list)
+                .atPositionOnView(0, R.id.textViewTitleDetailProject))
+                .check(matches(withText("CD DE ALBERTO RODRÍGUEZ")));
+        try {
+            onView(new RecyclerViewMatcher(R.id.project_list)
+                    .atPositionOnView(1, R.id.textViewTitleDetailProject))
+                    .check(matches(isDisplayed()));
+            fail("Se está mostrando un elemento de la lista que no corresponde");
+        } catch (Exception e){
+            assertThat(e,notNullValue());
+        }
+
+        //Cerramos sesion y se vuelve a pantalla de login(pantalla inicial)
+        onView(withId(R.id.exitIcon)).perform(click());
+        onView(withId(R.id.activity_login)).check(matches(isDisplayed()));
+
+        //Se vuelve a iniciar sesion
+        sesionInitProcedure("usuarioTest","password");
+        onView(withId(R.id.buttonLogin)).perform(click());
+
+        //Estamos en la lista de proyectos
+        onView(withId(R.id.activity_project_list)).check(matches(isDisplayed()));
+
+        //Se debe mostar la lista de favoritos con el elemento añadido antes de cerrar sesión
+        openActionBarOverflowOrOptionsMenu(ApplicationProvider.getApplicationContext());
+        onView(withText("Ver favoritos")).perform(click());
+
+        onView(new RecyclerViewMatcher(R.id.project_list)
+                .atPositionOnView(0, R.id.textViewTitleDetailProject))
+                .check(matches(withText("CD DE ALBERTO RODRÍGUEZ")));
+        try {
+            onView(new RecyclerViewMatcher(R.id.project_list)
+                    .atPositionOnView(1, R.id.textViewTitleDetailProject))
+                    .check(matches(isDisplayed()));
+            fail("Se está mostrando un elemento de la lista que no corresponde");
+        } catch (Exception e){
+            assertThat(e,notNullValue());
+        }
+
+
+    }
+
 
 
 
